@@ -12,7 +12,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from 'firebase/auth';
-import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, collection, doc, getDoc, setDoc, enableIndexedDbPersistence } from 'firebase/firestore';
 // config
 import { FIREBASE_API } from '../config-global';
 
@@ -52,7 +52,9 @@ const firebaseApp = initializeApp(FIREBASE_API);
 
 const AUTH = getAuth(firebaseApp);
 
-const DB = getFirestore(firebaseApp);
+export const DB = getFirestore(firebaseApp);
+
+enableIndexedDbPersistence(DB)
 
 const GOOGLE_PROVIDER = new GoogleAuthProvider();
 
