@@ -20,6 +20,8 @@ import FormProvider, {
 } from '../../../components/hook-form';
 //
 import BlogNewPostPreview from './BlogNewPostPreview';
+import { addPost } from '../../../firebase/post';
+import { STORAGE } from '../../../auth/FirebaseContext';
 
 // ----------------------------------------------------------------------
 
@@ -95,6 +97,8 @@ export default function BlogNewPostForm() {
 
   const onSubmit = async (data) => {
     try {
+      await addPost(data);
+      console.log('Subiendo data');
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       handleClosePreview();
@@ -109,7 +113,7 @@ export default function BlogNewPostForm() {
   const handleDrop = useCallback(
     (acceptedFiles) => {
       const file = acceptedFiles[0];
-
+      console.log("Estoy seteando la imagen en el blob 7");
       const newFile = Object.assign(file, {
         preview: URL.createObjectURL(file),
       });

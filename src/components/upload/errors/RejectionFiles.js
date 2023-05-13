@@ -30,6 +30,7 @@ export default function RejectionFiles({ fileRejections }) {
       }}
     >
       {fileRejections.map(({ file, errors }) => {
+          console.log("Estoy seteando la imagen en el blob 11");
         const { path, size } = fileData(file);
 
         return (

@@ -13,7 +13,7 @@ const addClient = async ({
   uidUsuario,
 }) => {
   try {
-    const response = await await addDoc(collection(DB, 'clientes'), {
+    const response = await addDoc(collection(DB, 'clientes'), {
       nombres: nombres.toUpperCase(),
       apellidos: apellidos.toUpperCase(),
       documento: Number(documento),
@@ -48,7 +48,7 @@ const deleteClient = async (id) => {
   }
 };
 
-const editarCliente = async ({
+const updateCliente = async ({
   id,
   nombres,
   apellidos,
@@ -76,4 +76,4 @@ const editarCliente = async ({
   }
 };
 
-export { addClient, getClient, deleteClient, editarCliente };
+export { addClient, getClient, deleteClient, updateCliente as editarCliente };

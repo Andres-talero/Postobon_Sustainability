@@ -36,6 +36,7 @@ export default function DemoUploadPage() {
   const handleDropSingleFile = useCallback((acceptedFiles) => {
     const newFile = acceptedFiles[0];
     if (newFile) {
+      console.log("Estoy seteando la imagen en el blob 5");
       setFile(
         Object.assign(newFile, {
           preview: URL.createObjectURL(newFile),

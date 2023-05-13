@@ -27,6 +27,7 @@ export default function BlogPostPage() {
   const { themeStretch } = useSettingsContext();
 
   const { title } = useParams();
+  console.log(title);
 
   const [recentPosts, setRecentPosts] = useState([]);
 

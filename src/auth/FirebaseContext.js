@@ -14,6 +14,7 @@ import {
 } from 'firebase/auth';
 import { getFirestore, collection, doc, getDoc, setDoc, enableIndexedDbPersistence } from 'firebase/firestore';
 // config
+import { getStorage } from "firebase/storage";
 import { FIREBASE_API } from '../config-global';
 
 // ----------------------------------------------------------------------
@@ -54,7 +55,9 @@ const AUTH = getAuth(firebaseApp);
 
 export const DB = getFirestore(firebaseApp);
 
-enableIndexedDbPersistence(DB)
+enableIndexedDbPersistence(DB);
+
+export const STORAGE = getStorage(firebaseApp);
 
 const GOOGLE_PROVIDER = new GoogleAuthProvider();
 

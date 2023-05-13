@@ -27,6 +27,7 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }) {
   return (
     <AnimatePresence initial={false}>
       {files.map((file) => {
+          console.log("Estoy seteando la imagen en el blob 10");
         const { key, name = '', size = 0 } = fileData(file);
 
         const isNotFormatFile = typeof file === 'string';

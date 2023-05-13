@@ -18,6 +18,7 @@ FileThumbnail.propTypes = {
 
 export default function FileThumbnail({ file, tooltip, imageView, onDownload, sx, imgSx }) {
   const { name = '', path = '', preview = '' } = fileData(file);
+  console.log("Estoy seteando la imagen en el blob 12");
 
   const format = fileFormat(path || preview);
 

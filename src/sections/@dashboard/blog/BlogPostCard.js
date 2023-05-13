@@ -38,7 +38,10 @@ BlogPostCard.propTypes = {
 export default function BlogPostCard({ post, index }) {
   const isDesktop = useResponsive('up', 'md');
 
-  const { cover, title, view, comment, share, author, createdAt } = post;
+  const { cover, title, view, comment, share, author, createdAt, id } = post;
+  const imageRute = cover.preview;
+
+  console.log(id);
 
   const latestPost = index === 0 || index === 1 || index === 2;
 
@@ -57,6 +60,7 @@ export default function BlogPostCard({ post, index }) {
         />
 
         <PostContent
+          id={id}
           title={title}
           view={view}
           comment={comment}
@@ -67,7 +71,7 @@ export default function BlogPostCard({ post, index }) {
 
         <StyledOverlay />
 
-        <Image alt="cover" src={cover} sx={{ height: 360 }} />
+        <Image alt="cover" src={imageRute} sx={{ height: 360 }} />
       </Card>
     );
   }
@@ -100,7 +104,7 @@ export default function BlogPostCard({ post, index }) {
           }}
         />
 
-        <Image alt="cover" src={cover} ratio="4/3" />
+        <Image alt="cover" src={imageRute} ratio="4/3" />
       </Box>
 
       <PostContent
@@ -117,6 +121,7 @@ export default function BlogPostCard({ post, index }) {
 // ----------------------------------------------------------------------
 
 PostContent.propTypes = {
+  id: PropTypes.string,
   view: PropTypes.number,
   index: PropTypes.number,
   share: PropTypes.number,
@@ -125,10 +130,12 @@ PostContent.propTypes = {
   createdAt: PropTypes.string,
 };
 
-export function PostContent({ title, view, comment, share, createdAt, index }) {
+export function PostContent({ id, title, view, comment, share, createdAt, index }) {
   const isDesktop = useResponsive('up', 'md');
 
-  const linkTo = PATH_DASHBOARD.blog.view(paramCase(title));
+  console.log(id);
+
+  const linkTo = PATH_DASHBOARD.blog.view(id);
 
   const latestPostLarge = index === 0;
 

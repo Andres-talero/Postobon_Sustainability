@@ -112,6 +112,8 @@ export default function ReactHookForm({ debug }) {
     (acceptedFiles) => {
       const file = acceptedFiles[0];
 
+      console.log("Estoy seteando la imagen en el blob 6");
+
       const newFile = Object.assign(file, {
         preview: URL.createObjectURL(file),
       });
@@ -127,6 +129,7 @@ export default function ReactHookForm({ debug }) {
     (acceptedFiles) => {
       const files = values.multiUpload || [];
 
+      console.log("Estoy seteando la imagen en el blob 7");
       const newFiles = acceptedFiles.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),

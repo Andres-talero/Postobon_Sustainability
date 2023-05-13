@@ -75,6 +75,7 @@ export default function ValuesPreview() {
 // ----------------------------------------------------------------------
 
 function parseValue(values, value) {
+  console.log("Estoy seteando la imagen en el blob 9");
   if (value === 'singleUpload') {
     return JSON.stringify(values.singleUpload && fileData(values.singleUpload));
   }

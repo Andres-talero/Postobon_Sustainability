@@ -15,6 +15,7 @@ import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../../sections/@dashboard/blog';
+import useGetAllPost from "../../hooks/useGetAllPosts";
 
 // ----------------------------------------------------------------------
 
@@ -27,26 +28,24 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function BlogPostsPage() {
+
   const { themeStretch } = useSettingsContext();
 
-  const [posts, setPosts] = useState([]);
+  const [postss, setPosts] = useState([]);
 
   const [sortBy, setSortBy] = useState('latest');
 
-  const sortedPosts = applySortBy(posts, sortBy);
+  const sortedPosts = applySortBy(postss, sortBy);
 
-  const getAllPosts = useCallback(async () => {
-    try {
-      const response = await axios.get('/api/blog/posts');
-      setPosts(response.data.posts);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+  const [posts, obtenerMasPost, hayMasPorCargar] = useGetAllPost();
+  console.log(posts);
 
   useEffect(() => {
-    getAllPosts();
-  }, [getAllPosts]);
+    if(posts.length > 0)
+    {
+    setPosts(posts);
+    }
+  }, [posts]);
 
   const handleChangeSortBy = (event) => {
     setSortBy(event.target.value);
@@ -92,7 +91,7 @@ export default function BlogPostsPage() {
         </Stack>
 
         <Grid container spacing={3}>
-          {(!posts.length ? [...Array(12)] : sortedPosts).map((post, index) =>
+          {(!postss.length ? [...Array(12)] : sortedPosts).map((post, index) =>
             post ? (
               <Grid key={post.id} item xs={12} sm={6} md={(index === 0 && 6) || 3}>
                 <BlogPostCard post={post} index={index} />
