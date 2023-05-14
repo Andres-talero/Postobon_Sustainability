@@ -12,9 +12,16 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from 'firebase/auth';
-import { getFirestore, collection, doc, getDoc, setDoc, enableIndexedDbPersistence } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  enableIndexedDbPersistence,
+} from 'firebase/firestore';
 // config
-import { getStorage } from "firebase/storage";
+import { getStorage } from 'firebase/storage';
 import { FIREBASE_API } from '../config-global';
 
 // ----------------------------------------------------------------------
@@ -89,7 +96,7 @@ export function AuthProvider({ children }) {
               user: {
                 ...user,
                 ...profile,
-                role: 'admin',
+                role: profile.role || 'user',
               },
             },
           });
@@ -138,6 +145,7 @@ export function AuthProvider({ children }) {
         uid: res.user?.uid,
         email,
         displayName: `${firstName} ${lastName}`,
+        role: 'user',
       });
     });
   }, []);

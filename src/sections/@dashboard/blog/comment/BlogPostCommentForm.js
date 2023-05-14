@@ -11,7 +11,7 @@ import { addComment } from "../../../../firebase/post"
 
 // ----------------------------------------------------------------------
 
-export default function BlogPostCommentForm({ id, user }) {
+export default function BlogPostCommentForm({ post, user }) {
   const CommentSchema = Yup.object().shape({
     comment: Yup.string().required('Comment is required'),
     name: Yup.string().required('Name is required'),
@@ -39,7 +39,7 @@ export default function BlogPostCommentForm({ id, user }) {
     e.preventDefault();
 
     try {
-      const uploadComment = await addComment(id, user, e.target.comment.value);
+      const uploadComment = await addComment(post, user, e.target.comment.value);
       console.log(uploadComment);
       reset();
     } catch (error) {

@@ -7,6 +7,7 @@ import { useLocales } from '../../../locales';
 import { StyledSubheader } from './styles';
 import NavList from './NavList';
 
+
 // ----------------------------------------------------------------------
 
 NavSectionVertical.propTypes = {
@@ -29,7 +30,7 @@ export default function NavSectionVertical({ data, sx, ...other }) {
             )}
 
             {group.items.map((list) => (
-              <NavList
+              <NavList 
                 key={list.title + list.path}
                 data={list}
                 depth={1}

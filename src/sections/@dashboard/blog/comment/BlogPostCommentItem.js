@@ -66,7 +66,7 @@ export default function BlogPostCommentItem({
           </Typography>
         </Stack>
 
-        {!hasReply && (
+        {/* {!hasReply && (
           <Button
             size="small"
             onClick={() => setOpenReply(!openReply)}
@@ -74,7 +74,7 @@ export default function BlogPostCommentItem({
           >
             Reply
           </Button>
-        )}
+        )} */}
       </ListItem>
 
       {openReply && (

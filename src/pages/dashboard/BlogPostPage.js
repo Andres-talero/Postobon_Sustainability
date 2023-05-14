@@ -172,11 +172,11 @@ export default function BlogPostPage() {
                 <Typography variant="h4">Comments</Typography>
 
                 <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                  ({post.comments.length})
+                  ({post.comment})
                 </Typography>
               </Stack>
 
-              <BlogPostCommentForm id={post.id} user={user} />
+              <BlogPostCommentForm post={post} user={user} />
 
               <Divider sx={{ mt: 5, mb: 2 }} />
             </Stack>
@@ -188,14 +188,14 @@ export default function BlogPostPage() {
             >
               <BlogPostCommentList comments={comments} />
 
-              <Pagination
+              {/* <Pagination
                 count={8}
                 sx={{
                   my: 5,
                   ml: 'auto',
                   mr: { xs: 'auto', md: 0 },
                 }}
-              />
+              /> */}
             </Stack>
           </Stack>
         )}

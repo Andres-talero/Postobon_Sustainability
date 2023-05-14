@@ -215,11 +215,23 @@ const updateView = async (id, userID, view) => {
 };
 
 //Crear un comentario
-const addComment = async (id, user, comment) => {
+const addComment = async (post, user, comment) => {
   try {
-    const validate = await validateUserPost(id, user.uid);
+    const validate = await validateUserPost(post.id, user.uid);
+    await updateUserPost(
+      validate[0].id,
+      post.id,
+      user.uid,
+      validate[0].favorite,
+      validate[0].comment + 1,
+      validate[0].view
+    );
+    await updateDoc(doc(DB, 'posts', post.id), {
+      comment: post.comment + 1,
+    });
+
     const data = {
-      postID: id,
+      postID: post.id,
       userID: user.uid,
       name: user.displayName,
       avatarUrl:

@@ -15,8 +15,10 @@ import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../../sections/@dashboard/blog';
-import useGetAllPost from "../../hooks/useGetAllPosts";
-
+import useGetAllPost from '../../hooks/useGetAllPosts';
+import { useLocales } from 'src/locales';
+import { capitalize } from '../../utils/text';
+import ValidateRole from 'src/auth/ValidateRole';
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
@@ -28,7 +30,6 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function BlogPostsPage() {
-
   const { themeStretch } = useSettingsContext();
 
   const [postss, setPosts] = useState([]);
@@ -40,10 +41,11 @@ export default function BlogPostsPage() {
   const [posts, obtenerMasPost, hayMasPorCargar] = useGetAllPost();
   console.log(posts);
 
+  const { translate } = useLocales();
+
   useEffect(() => {
-    if(posts.length > 0)
-    {
-    setPosts(posts);
+    if (posts.length > 0) {
+      setPosts(posts);
     }
   }, [posts]);
 
@@ -54,34 +56,28 @@ export default function BlogPostsPage() {
   return (
     <>
       <Helmet>
-        <title> Blog: Posts | Minimal UI</title>
+        <title>{capitalize(translate('posts'))}</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Blog"
+          heading={capitalize(translate('posts'))}
           links={[
             {
-              name: 'Dashboard',
-              href: PATH_DASHBOARD.root,
-            },
-            {
-              name: 'Blog',
-              href: PATH_DASHBOARD.blog.root,
-            },
-            {
-              name: 'Posts',
+              name: capitalize(translate('posts')),
             },
           ]}
           action={
-            <Button
-              component={RouterLink}
-              to={PATH_DASHBOARD.blog.new}
-              variant="contained"
-              startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              New Post
-            </Button>
+            <ValidateRole Administrador>
+              <Button
+                component={RouterLink}
+                to={PATH_DASHBOARD.blog.new}
+                variant="contained"
+                startIcon={<Iconify icon="eva:plus-fill" />}
+              >
+                New Post
+              </Button>
+            </ValidateRole>
           }
         />
 
