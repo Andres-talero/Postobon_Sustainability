@@ -1,7 +1,17 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { v4 as uuidv4 } from 'uuid';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { collection, addDoc, getDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  getDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+  query,
+  where,
+  getDocs,
+} from 'firebase/firestore';
 import { DB, STORAGE } from '../auth/FirebaseContext';
 
 async function addPost(data) {
@@ -19,7 +29,8 @@ async function addPost(data) {
 
     const filename2 = `${uuidv4()}`;
 
-    const blob2 = new Blob([body], { type: 'text/html' });
+    const blob2 = new Blob([body], { type: 'text/plain' });
+    console.log(blob2);
 
     const storageRef2 = await ref(STORAGE, filename2);
 
@@ -71,7 +82,7 @@ const getAllPost = async () => {
   }
 };
 
-const getPost = async (id) => {
+const getPost = async ({ id }) => {
   try {
     const response = await getDoc(doc(DB, 'posts', id));
     return response.exists() ? response.data() : null;
@@ -117,4 +128,122 @@ const updatePost = async ({
   }
 };
 
-export { addPost, getPost, getAllPost, deletePost, updatePost };
+//Api para actualizar el favorite de un post
+const updateFavorite = async (id, userID, favorite) => {
+  try {
+    const validate = await validateUserPost(id, userID);
+    console.log(validate);
+    if (validate[0].favorite === false) {
+      await updateUserPost(validate[0].id, id, userID, true, validate[0].comment, validate[0].view);
+      const response = await updateDoc(doc(DB, 'posts', id), {
+        favorite: favorite + 1,
+      });
+      return response;
+    } else {
+      await updateUserPost(
+        validate[0].id,
+        id,
+        userID,
+        false,
+        validate[0].comment,
+        validate[0].view
+      );
+      const response = await updateDoc(doc(DB, 'posts', id), {
+        favorite: favorite - 1,
+      });
+      return response;
+    }
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+const addUserPost = async (postID, userID, view) => {
+  try {
+    const response = await addDoc(collection(DB, 'post_user'), {
+      postID,
+      userID,
+      favorite: false,
+      comment: false,
+      view,
+    });
+    return response;
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+const updateUserPost = async (id, postID, userID, favorite, comment, view) => {
+  try {
+    const response = await updateDoc(doc(DB, 'post_user', id), {
+      userID,
+      favorite,
+      comment,
+      view,
+    });
+    return response;
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+const validateUserPost = async (postID, userID) => {
+  try {
+    const q = query(collection(DB, 'post_user'), where('postID', '==', postID));
+    const response = await getDocs(q);
+    const data = response.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const userPost = data.filter((item) => item.userID === userID);
+    return userPost;
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+const updateView = async (id, userID, view) => {
+  try {
+    const validate = await validateUserPost(id, userID);
+    if (validate.length === 0) {
+      await addUserPost(id, userID, true);
+      const response = await updateDoc(doc(DB, 'posts', id), {
+        view: view + 1,
+      });
+      return response;
+    }
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+//Crear un comentario
+const addComment = async (id, user, comment) => {
+  try {
+    const validate = await validateUserPost(id, user.uid);
+    const data = {
+      postID: id,
+      userID: user.uid,
+      name: user.displayName,
+      avatarUrl:
+        'https://firebasestorage.googleapis.com/v0/b/postobon-sustainability.appspot.com/o/Postobon.png?alt=media&token=0374bc94-e78b-4dfc-92d0-e671ba719249',
+      message: comment,
+      postedAt: new Date().toISOString(),
+      users: [],
+      replyComment: [],
+    };
+    console.log(data);
+    const response = await addDoc(collection(DB, 'post_comments'), data);
+    return response;
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+export {
+  addPost,
+  getPost,
+  getAllPost,
+  deletePost,
+  updatePost,
+  updateFavorite,
+  updateView,
+  addComment,
+};

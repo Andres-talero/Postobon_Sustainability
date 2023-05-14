@@ -120,7 +120,7 @@ export default function BlogPostHero({ post }) {
 
       <StyledOverlay />
 
-      <Image alt="cover" src={cover} ratio="16/9" />
+      <Image alt="cover" src={cover.preview} ratio="16/9" />
     </Box>
   );
 }

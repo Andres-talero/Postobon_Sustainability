@@ -6,6 +6,7 @@ import { fShortenNumber } from '../../../utils/formatNumber';
 // components
 import Iconify from '../../../components/iconify';
 import { CustomAvatarGroup } from '../../../components/custom-avatar';
+import { updateFavorite } from 'src/firebase/post';
 
 // ----------------------------------------------------------------------
 
@@ -13,8 +14,12 @@ BlogPostTags.propTypes = {
   post: PropTypes.object,
 };
 
-export default function BlogPostTags({ post }) {
-  const { favorite, tags, favoritePerson } = post;
+export default function BlogPostTags({ post, user }) {
+  const { id, favorite, tags, favoritePerson } = post;
+
+  const handleFavorite = async () => {
+    await updateFavorite(id, user.uid, favorite);
+  };
 
   return (
     <>
@@ -30,6 +35,7 @@ export default function BlogPostTags({ post }) {
             <Checkbox
               defaultChecked
               size="small"
+              onClick={handleFavorite}
               color="error"
               icon={<Iconify icon="eva:heart-fill" />}
               checkedIcon={<Iconify icon="eva:heart-fill" />}

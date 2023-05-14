@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 // @mui
 import { Box, Divider, Stack, Container, Typography, Pagination } from '@mui/material';
 // routes
+// eslint-disable-next-line import/no-unresolved
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 import axios from '../../utils/axios';
@@ -12,14 +13,21 @@ import Markdown from '../../components/markdown';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import { useSettingsContext } from '../../components/settings';
 import { SkeletonPostDetails } from '../../components/skeleton';
+import { useLocales } from 'src/locales';
 // sections
 import {
   BlogPostHero,
-  BlogPostTags,
+  BlogPostTags, 
   BlogPostCard,
   BlogPostCommentList,
   BlogPostCommentForm,
 } from '../../sections/@dashboard/blog';
+import useGetPost from '../../hooks/useGetPost';
+import useGetRecentPosts from '../../hooks/useGetRecentPosts';
+import { useAuthContext } from '../../auth/useAuthContext';
+import { updateView } from '../../firebase/post';
+import { capitalize } from '../../utils/text';
+import useGetAllCommentsByPost from '../../hooks/useGetAllCommentsByPost';
 
 // ----------------------------------------------------------------------
 
@@ -27,52 +35,68 @@ export default function BlogPostPage() {
   const { themeStretch } = useSettingsContext();
 
   const { title } = useParams();
-  console.log(title);
+
+  const { user } = useAuthContext();
+
+  console.log(user);
+
+  const [post] = useGetPost({ id: title });
 
   const [recentPosts, setRecentPosts] = useState([]);
-
-  const [post, setPost] = useState(null);
 
   const [loadingPost, setLoadingPost] = useState(true);
 
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const getPost = useCallback(async () => {
-    try {
-      const response = await axios.get('/api/blog/post', {
-        params: { title },
-      });
+  const [body, setBody] = useState(null);
 
-      setPost(response.data.post);
+  const [posts] = useGetRecentPosts();
+
+  const [comments] = useGetAllCommentsByPost(title);
+
+  console.log(comments);
+
+  const { translate } = useLocales();
+
+  const getPostFunction = useCallback(async () => {
+    try {
+      const textUrl = post.content;
+      //acceder a textUrl y extraer el texto
+      const response = await axios.get(textUrl);
+      const text = response.data;
+      setBody(text);
       setLoadingPost(false);
     } catch (error) {
       console.error(error);
       setLoadingPost(false);
       setErrorMsg(error.message);
     }
-  }, [title]);
-
-  const getRecentPosts = useCallback(async () => {
-    try {
-      const response = await axios.get('/api/blog/posts/recent', {
-        params: { title },
-      });
-
-      setRecentPosts(response.data.recentPosts);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [title]);
+  }, [post]);
 
   useEffect(() => {
-    getRecentPosts();
-  }, [getRecentPosts]);
+    if (posts.length > 0) {
+      setRecentPosts(posts);
+    }
+  }, [posts]);
 
   useEffect(() => {
-    if (title) {
-      getPost();
+    if (post !== null) {
+      getPostFunction();
     }
-  }, [getPost, title]);
+  }, [getPostFunction, post]);
+
+  useEffect(() => {
+    if (post !== null && user !== null) {
+      const { id, view } = post;
+      const { uid } = user;
+      const updateViewFunction = async () => {
+        await updateView(id, uid, view);
+      };
+      setTimeout(() => {
+        updateViewFunction();
+      }, 2000);
+    }
+  }, [post, user]);
 
   return (
     <>
@@ -82,7 +106,7 @@ export default function BlogPostPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Post Details"
+          heading={capitalize(translate('post'))}
           links={[
             {
               name: 'Dashboard',
@@ -120,12 +144,11 @@ export default function BlogPostPage() {
             </Typography>
 
             <Markdown
-              children={post.body}
+              children={body}
               sx={{
                 px: { md: 5 },
               }}
             />
-
             <Stack
               spacing={3}
               sx={{
@@ -135,7 +158,7 @@ export default function BlogPostPage() {
             >
               <Divider />
 
-              <BlogPostTags post={post} />
+              <BlogPostTags post={post} user={user} />
 
               <Divider />
             </Stack>
@@ -153,7 +176,7 @@ export default function BlogPostPage() {
                 </Typography>
               </Stack>
 
-              <BlogPostCommentForm />
+              <BlogPostCommentForm id={post.id} user={user} />
 
               <Divider sx={{ mt: 5, mb: 2 }} />
             </Stack>
@@ -163,7 +186,7 @@ export default function BlogPostPage() {
                 px: { md: 5 },
               }}
             >
-              <BlogPostCommentList comments={post.comments} />
+              <BlogPostCommentList comments={comments} />
 
               <Pagination
                 count={8}

@@ -7,10 +7,11 @@ import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import FormProvider, { RHFTextField } from '../../../../components/hook-form';
+import { addComment } from "../../../../firebase/post"
 
 // ----------------------------------------------------------------------
 
-export default function BlogPostCommentForm() {
+export default function BlogPostCommentForm({ id, user }) {
   const CommentSchema = Yup.object().shape({
     comment: Yup.string().required('Comment is required'),
     name: Yup.string().required('Name is required'),
@@ -34,18 +35,20 @@ export default function BlogPostCommentForm() {
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const uploadComment = await addComment(id, user, e.target.comment.value);
+      console.log(uploadComment);
       reset();
-      console.log('DATA', data);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack spacing={3} alignItems="flex-end">
         <RHFTextField
           name="comment"

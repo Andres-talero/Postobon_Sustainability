@@ -7,6 +7,7 @@ import localStorageAvailable from '../utils/localStorageAvailable';
 import { defaultLang } from './config-lang';
 //
 import enLocales from './langs/en';
+import esLocales from './langs/es';
 import frLocales from './langs/fr';
 import viLocales from './langs/vi';
 import cnLocales from './langs/cn';
@@ -28,6 +29,7 @@ i18n
   .init({
     resources: {
       en: { translations: enLocales },
+      es: { translations: esLocales },
       fr: { translations: frLocales },
       vi: { translations: viLocales },
       cn: { translations: cnLocales },

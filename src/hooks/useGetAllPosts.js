@@ -3,17 +3,17 @@ import { collection, onSnapshot, query, orderBy, limit, startAfter } from 'fireb
 import { DB } from '../auth/FirebaseContext';
 
 const useGetAllPost = () => {
-  const [posts, cambiarClientes] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [ultimoDato, setUltimoDato] = useState(null);
   const [hayMasPorCargar, cambiarhayMasPorCargar] = useState(false);
 
   const obtenerMasPost = () => {
-    const consultaMas = query(collection(DB, 'posts'), limit(10), startAfter(ultimoDato));
+    const consultaMas = query(collection(DB, 'posts'), limit(25), startAfter(ultimoDato));
 
     onSnapshot(consultaMas, (snapshot) => {
       if (snapshot.docs.length > 0) {
         setUltimoDato(snapshot.docs[snapshot.docs.length - 1]);
-        cambiarClientes(
+        setPosts(
           posts.concat(snapshot.docs.map((cliente) => ({ ...cliente.data(), id: cliente.id })))
         );
       } else {
@@ -23,7 +23,7 @@ const useGetAllPost = () => {
   };
 
   useEffect(() => {
-    const consulta = query(collection(DB, 'posts'), limit(10));
+    const consulta = query(collection(DB, 'posts'), limit(25));
 
     const unsuscribe = onSnapshot(consulta, { includeMetadataChanges: true }, (snapshot) => {
       if (snapshot.docs.length > 0) {
@@ -32,7 +32,7 @@ const useGetAllPost = () => {
       } else {
         cambiarhayMasPorCargar(false);
       }
-      cambiarClientes(snapshot.docs.map((cliente) => ({ ...cliente.data(), id: cliente.id })));
+      setPosts(snapshot.docs.map((cliente) => ({ ...cliente.data(), id: cliente.id })));
     });
 
     return unsuscribe;

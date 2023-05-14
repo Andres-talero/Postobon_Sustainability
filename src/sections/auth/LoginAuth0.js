@@ -10,13 +10,11 @@ import LoginLayout from '../../layouts/login';
 export default function LoginAuth0() {
   const { method } = useAuthContext();
 
-  // NOTE: Turn off comments below to enable Auth0.
-  // const { login } = useAuthContext();
+  const { login } = useAuthContext();
 
   const handleLoginAuth0 = async () => {
     try {
-      // NOTE: Turn off comments below to enable Auth0.
-      // await login();
+      await login();
     } catch (error) {
       console.error(error);
     }
@@ -36,10 +34,6 @@ export default function LoginAuth0() {
           />
         </Tooltip>
       </Stack>
-
-      <Alert severity="info" sx={{ mb: 3 }}>
-        Use email : <strong>demo@minimals.cc</strong> / password :<strong> demo1234</strong>
-      </Alert>
 
       <Button
         fullWidth

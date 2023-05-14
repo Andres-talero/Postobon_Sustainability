@@ -93,7 +93,7 @@ export const PATH_DASHBOARD = {
     posts: path(ROOTS_DASHBOARD, '/blog/posts'),
     new: path(ROOTS_DASHBOARD, '/blog/new'),
     view: (title) => path(ROOTS_DASHBOARD, `/blog/post/${title}`),
-    demoView: path(ROOTS_DASHBOARD, '/blog/post/apply-these-7-secret-techniques-to-improve-event'),
+    demoView: path(ROOTS_DASHBOARD, '/blog/post/f0GVK2VryiXkiPmO07m3'),
   },
 };
 
