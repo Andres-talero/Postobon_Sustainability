@@ -4,6 +4,8 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled, alpha, useTheme } from '@mui/material/styles';
 import { Button, Box, Link, Container, Typography, Stack, Grid, Rating } from '@mui/material';
+// ecobone
+import { EcoBonApp } from '../../EcoBon/EcoBon';
 // routes
 import { PATH_DASHBOARD, PATH_FIGMA_PREVIEW, PATH_FREE_VERSION } from '../../routes/paths';
 // hooks
@@ -109,7 +111,7 @@ export default function HomeHero() {
   );
 
   return (
-    <>
+    <Container>
       <StyledRoot sx={{ ...(hide && { opacity: 0 }) }}>
         <Container component={MotionContainer} sx={{ height: 1 }}>
           <Grid container spacing={10} sx={{ height: 1 }}>
@@ -131,19 +133,17 @@ export default function HomeHero() {
       </StyledRoot>
 
       <Box sx={{ height: { md: '100vh' } }} />
-    </>
+    </Container>
   );
 }
-
-// ----------------------------------------------------------------------
 
 function Description() {
   return (
     <StyledDescription>
       <m.div variants={varFade().in}>
         <Typography variant="h2" sx={{ textAlign: 'center' }}>
-          Start a <br />
-          new project with
+          Empieza a <br />
+          estudiar con
         </Typography>
       </m.div>
 
@@ -157,91 +157,25 @@ function Description() {
             repeat: Infinity,
           }}
         >
-          Minimal
+          {EcoBonApp.title}
         </StyledGradientText>
       </m.div>
 
       <m.div variants={varFade().in}>
         <Typography variant="body2" sx={{ textAlign: 'center' }}>
-          The starting point for your next project is based on MUI.Easy customization Helps you
-          build apps faster and better.
+          Únete a nuestra comunidad comprometida y desbloquea un mundo de conocimiento ecoamigable.
         </Typography>
       </m.div>
 
-      <m.div variants={varFade().in}>
-        <Stack
-          spacing={0.75}
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ my: 3 }}
-        >
-          <Rating readOnly value={4.95} precision={0.1} max={5} />
-          <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            <Box component="strong" sx={{ mr: 0.5, color: 'text.primary' }}>
-              4.95/5
-            </Box>
-            (99+ reviews)
-          </Typography>
-        </Stack>
-      </m.div>
-
-      <m.div variants={varFade().in}>
-        <Stack spacing={1.5} direction={{ xs: 'column-reverse', sm: 'row' }} sx={{ mb: 5 }}>
-          <Stack alignItems="center" spacing={2}>
-            <Button
-              component={RouterLink}
-              to={PATH_DASHBOARD.root}
-              color="inherit"
-              size="large"
-              variant="contained"
-              startIcon={<Iconify icon="eva:flash-fill" width={24} />}
-              sx={{
-                bgcolor: 'text.primary',
-                color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
-                '&:hover': {
-                  bgcolor: 'text.primary',
-                },
-              }}
-            >
-              Live Preview
-            </Button>
-
-            <Link
-              color="inherit"
-              variant="caption"
-              target="_blank"
-              rel="noopener"
-              href={PATH_FREE_VERSION}
-              sx={{ textDecoration: 'underline', display: 'inline-flex', alignItems: 'center' }}
-            >
-              <Iconify icon="eva:external-link-fill" width={16} sx={{ mr: 0.5 }} />
-              Get Free Version
-            </Link>
-          </Stack>
-
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            startIcon={<Iconify icon="eva:external-link-fill" width={24} />}
-            target="_blank"
-            rel="noopener"
-            href={PATH_FIGMA_PREVIEW}
-            sx={{ borderColor: 'text.primary' }}
-          >
-            Design Preview
-          </Button>
-        </Stack>
-      </m.div>
+      <m.br variants={varFade().in} />
 
       <Stack spacing={3} sx={{ textAlign: 'center', opacity: 0.48 }}>
         <m.div variants={varFade().in}>
-          <Typography variant="overline">Available For</Typography>
+          <Typography variant="overline">Hecho para</Typography>
         </m.div>
 
         <Stack spacing={2} direction="row" justifyContent="center">
-          {['sketch', 'figma', 'js', 'ts', 'nextjs'].map((platform) => (
+          {['postobon'].map((platform) => (
             <m.div key={platform} variants={varFade().in}>
               <SvgColor src={`/assets/icons/platforms/ic_${platform}.svg`} />
             </m.div>
@@ -251,7 +185,6 @@ function Description() {
     </StyledDescription>
   );
 }
-// ----------------------------------------------------------------------
 
 function Content() {
   const theme = useTheme();
@@ -305,7 +238,7 @@ function Content() {
           animate={{ y: ['100%', '0%'] }}
           transition={transition}
           alt={`hero_${isLight ? 'light' : 'dark'}_2`}
-          src={`/assets/images/home/hero_${isLight ? 'light' : 'dark'}_2.png`}
+          src="assets/EcoBon/unplash/casey_horner-unplash.jpg"
           sx={{ position: 'absolute' }}
         />
         <Box
@@ -313,7 +246,7 @@ function Content() {
           animate={{ y: ['0%', '-100%'] }}
           transition={transition}
           alt={`hero_${isLight ? 'light' : 'dark'}_2`}
-          src={`/assets/images/home/hero_${isLight ? 'light' : 'dark'}_2.png`}
+          src="assets/EcoBon/unplash/casey_horner-unplash_reverse.jpg"
           sx={{ position: 'absolute' }}
         />
       </Stack>

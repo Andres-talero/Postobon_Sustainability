@@ -15,7 +15,6 @@ import { PATH_AUTH, PATH_DOCS, PATH_MINIMAL_ON_STORE } from '../../routes/paths'
 
 // components
 import Logo from '../../components/logo';
-import Label from '../../components/label';
 //
 import navConfig from './nav/config-navigation';
 import NavMobile from './nav/mobile';
@@ -54,7 +53,7 @@ export default function Header() {
         }}
       >
         <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
-          <Logo />
+          <Logo sx={{ height: '4vh' }} />
           <Box sx={{ flexGrow: 1 }} />
           {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />}
 

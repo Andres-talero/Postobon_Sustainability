@@ -1,10 +1,11 @@
 // @mui
 import { Divider, IconButton, Stack } from '@mui/material';
+// ecobon
+import { EcoBonApp } from '../../EcoBon/EcoBon';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
-import { EcoBonApp } from 'src/EcoBon/EcoBon';
 
 // ----------------------------------------------------------------------
 

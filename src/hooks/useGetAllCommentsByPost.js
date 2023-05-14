@@ -1,13 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  collection,
-  onSnapshot,
-  query,
-  orderBy,
-  limit,
-  startAfter,
-  where,
-} from 'firebase/firestore';
+import { collection, onSnapshot, query, limit, startAfter, where } from 'firebase/firestore';
 import { DB } from '../auth/FirebaseContext';
 
 const useGetAllCommentsByPost = (id) => {

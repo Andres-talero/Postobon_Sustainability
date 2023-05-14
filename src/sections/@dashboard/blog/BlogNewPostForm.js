@@ -21,7 +21,6 @@ import FormProvider, {
 //
 import BlogNewPostPreview from './BlogNewPostPreview';
 import { addPost } from '../../../firebase/post';
-import { STORAGE } from '../../../auth/FirebaseContext';
 
 // ----------------------------------------------------------------------
 

@@ -2,6 +2,8 @@ import { m } from 'framer-motion';
 // @mui
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Card, Container, Typography, Stack } from '@mui/material';
+// ecobon
+import { EcoBonApp } from '../../EcoBon/EcoBon';
 // components
 import Image from '../../components/image';
 import { MotionViewport, varFade } from '../../components/animate';
@@ -10,20 +12,19 @@ import { MotionViewport, varFade } from '../../components/animate';
 
 const CARDS = [
   {
-    icon: ' /assets/icons/home/ic_make_brand.svg',
+    icon: ' /assets/icons/home/ic_checklist.svg',
     title: 'Branding',
-    description: 'Consistent design makes it easy to brand your own.',
+    description: 'Aprender nuevos temas de cultura organizacional en pro de la sostenibilidad.',
   },
   {
-    icon: ' /assets/icons/home/ic_design.svg',
+    icon: ' /assets/icons/home/ic_leaf.svg',
     title: 'UI & UX Design',
-    description:
-      'The kit is built on the principles of the atomic design system. It helps you to create projects fastest and easily customized packages for your projects.',
+    description: 'Conocer más de la cultura sostenible.',
   },
   {
-    icon: ' /assets/icons/home/ic_development.svg',
-    title: 'Development',
-    description: 'Easy to customize and extend, saving you time and money.',
+    icon: ' /assets/icons/home/ic_historigrama.svg',
+    title: 'Resultados',
+    description: 'Visualizar tu progreso del fortalecimiento en la cultura organizacional.',
   },
 ];
 
@@ -56,16 +57,8 @@ export default function HomeMinimal() {
             mb: { xs: 5, md: 10 },
           }}
         >
-          <m.div variants={varFade().inUp}>
-            <Typography component="div" variant="overline" sx={{ color: 'text.disabled' }}>
-              Minimal UI
-            </Typography>
-          </m.div>
-
           <m.div variants={varFade().inDown}>
-            <Typography variant="h2">
-              What minimal <br /> helps you?
-            </Typography>
+            <Typography variant="h2">¿En que te ayuda EcoBón?</Typography>
           </m.div>
         </Stack>
 

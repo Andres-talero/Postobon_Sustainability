@@ -12,4 +12,8 @@ export const EcoBonApp = {
   orSignInWith: 'O logeate con',
   signUpButton: 'Registrarse',
   forgotPassword: '¿Olvidaste tu pass?',
+  github: {
+    kevgogo: 'https://github.com/kevgogo',
+    wiltalero: 'https://github.com/Andres-talero',
+  },
 };

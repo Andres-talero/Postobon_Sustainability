@@ -8,6 +8,7 @@ import { _socials } from '../../_mock/arrays';
 // components
 import Logo from '../../components/logo';
 import Iconify from '../../components/iconify';
+import { EcoBonApp } from '../../EcoBon/EcoBon';
 
 // ----------------------------------------------------------------------
 
@@ -57,9 +58,10 @@ export default function Footer() {
         <Logo sx={{ mb: 1, mx: 'auto' }} />
 
         <Typography variant="caption" component="div">
-          © All rights reserved
-          <br /> made by &nbsp;
-          <Link href="https://minimals.cc/"> minimals.cc </Link>
+          © Derechos Reservados
+          <br /> Hecho por&nbsp;
+          <Link href={EcoBonApp.github.kevgogo}>Kevin Gómez</Link>&nbsp;&amp;&nbsp;
+          <Link href={EcoBonApp.github.wiltalero}>Andres Talero</Link>
         </Typography>
       </Container>
     </Box>

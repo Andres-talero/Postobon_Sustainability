@@ -110,3 +110,10 @@ export const PATH_FREE_VERSION = 'https://mui.com/store/items/minimal-dashboard-
 
 export const PATH_FIGMA_PREVIEW =
   'https://www.figma.com/file/rWMDOkMZYw2VpTdNuBBCvN/%5BPreview%5D-Minimal-Web.26.11.22?node-id=0%3A1&t=ya2mDFiuhTXXLLF1-1';
+
+export const PATH_ECOBON = {
+  proyecto: 'https://docs.minimals.cc',
+  equipo: 'https://docs.minimals.cc/changelog',
+  cliente: 'https://www.postobon.com/',
+  universidad: 'https://universidadean.edu.co/',
+};

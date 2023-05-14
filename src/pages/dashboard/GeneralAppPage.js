@@ -1,7 +1,10 @@
 import { Helmet } from 'react-helmet-async';
+
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Stack, Button } from '@mui/material';
+import { Container, Grid, Stack } from '@mui/material';
+// ecobon
+import { EcoBonApp } from '../../EcoBon/EcoBon';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
 // _mock_
@@ -29,7 +32,6 @@ import {
 } from '../../sections/@dashboard/general/app';
 // assets
 import { SeoIllustration } from '../../assets/illustrations';
-import { EcoBonApp } from 'src/EcoBon/EcoBon';
 
 // ----------------------------------------------------------------------
 

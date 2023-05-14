@@ -4,18 +4,7 @@ import { Box } from '@mui/material';
 // components
 import ScrollProgress from '../components/scroll-progress';
 // sections
-import {
-  HomeHero,
-  HomeMinimal,
-  HomeDarkMode,
-  HomeLookingFor,
-  HomeForDesigner,
-  HomeColorPresets,
-  HomePricingPlans,
-  HomeAdvertisement,
-  HomeCleanInterfaces,
-  HomeHugePackElements,
-} from '../sections/home';
+import { HomeHero, HomeMinimal } from '../sections/home';
 
 // ----------------------------------------------------------------------
 
@@ -38,22 +27,6 @@ export default function HomePage() {
         }}
       >
         <HomeMinimal />
-
-        <HomeHugePackElements />
-
-        <HomeForDesigner />
-
-        <HomeDarkMode />
-
-        <HomeColorPresets />
-
-        <HomeCleanInterfaces />
-
-        <HomePricingPlans />
-
-        <HomeLookingFor />
-
-        <HomeAdvertisement />
       </Box>
     </>
   );

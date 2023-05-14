@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, onSnapshot, doc, orderBy, limit, startAfter } from 'firebase/firestore';
+import { onSnapshot, doc } from 'firebase/firestore';
 import { DB } from '../auth/FirebaseContext';
 
 const useGetPost = ({ id }) => {
