@@ -26,19 +26,25 @@ import { STORAGE } from '../../../auth/FirebaseContext';
 // ----------------------------------------------------------------------
 
 const TAGS_OPTION = [
-  'Toy Story 3',
-  'Logan',
-  'Full Metal Jacket',
-  'Dangal',
-  'The Sting',
-  '2001: A Space Odyssey',
-  "Singin' in the Rain",
-  'Toy Story',
-  'Bicycle Thieves',
-  'The Kid',
-  'Inglourious Basterds',
-  'Snatch',
-  '3 Idiots',
+  'Sustainability',
+  'Nature',
+  'Ecology',
+  'Green Living',
+  'Environment',
+  'Ecosystem',
+  'Global Warming',
+  'Renewable',
+  'Energy',
+  'Water',
+  'Recycling',
+  'Pollution',
+  'Plants',
+  'Animals',
+  'Oceans',
+  'Forests',
+  'Polar',
+  'Climate Change',
+  'Greenhouse Gas',
 ];
 
 // ----------------------------------------------------------------------
@@ -64,7 +70,7 @@ export default function BlogNewPostForm() {
     description: '',
     content: '',
     cover: null,
-    tags: ['The Kid'],
+    tags: ['Sustainability'],
     publish: true,
     comments: true,
     metaTitle: '',
@@ -98,7 +104,6 @@ export default function BlogNewPostForm() {
   const onSubmit = async (data) => {
     try {
       await addPost(data);
-      console.log('Subiendo data');
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       handleClosePreview();
@@ -113,7 +118,6 @@ export default function BlogNewPostForm() {
   const handleDrop = useCallback(
     (acceptedFiles) => {
       const file = acceptedFiles[0];
-      console.log("Estoy seteando la imagen en el blob 7");
       const newFile = Object.assign(file, {
         preview: URL.createObjectURL(file),
       });

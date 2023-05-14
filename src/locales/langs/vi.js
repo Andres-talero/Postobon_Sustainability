@@ -56,6 +56,8 @@ const vi = {
   other_cases: `Trường hợp khác`,
   item_by_roles: `mục theo vai trò`,
   only_admin_can_see_this_item: `Chỉ có quản trị viên mới có thể nhìn thấy mục này`,
+  new_post: `bài viết mới`,
+  posts_management: `quản lý bài viết`,
 };
 
 export default vi;

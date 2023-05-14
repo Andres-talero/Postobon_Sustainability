@@ -6,20 +6,15 @@ const ValidateRole = (props) => {
   const propsR = props;
 
   if (user) {
-    if (user.rol === 'admin') {
+    if (user.role === 'admin') {
       if (propsR.Administrador) {
-        return props.children;
-      } else {
-        return <></>;
+        return propsR.children;
       }
-    } else if (user.rol === 'user') {
+    }
+    if (user.role === 'user') {
       if (propsR.User) {
-        return props.children;
-      } else {
-        return <></>;
+        return propsR.children;
       }
-    } else {
-      return null;
     }
   }
 };

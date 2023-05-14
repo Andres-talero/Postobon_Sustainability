@@ -56,6 +56,8 @@ const es = {
   other_cases: `otros casos`,
   item_by_roles: `elemento por roles`,
   only_admin_can_see_this_item: `sólo el administrador puede ver este elemento`,
+  new_post: `nueva publicación`,
+  posts_management: `gestión de publicaciones`,
 };
 
 export default es;

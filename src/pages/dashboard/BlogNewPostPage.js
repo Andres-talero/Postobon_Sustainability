@@ -2,38 +2,37 @@ import { Helmet } from 'react-helmet-async';
 // @mui
 import { Container } from '@mui/material';
 // routes
+import { useLocales } from 'src/locales';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import { BlogNewPostForm } from '../../sections/@dashboard/blog';
+import { capitalize } from '../../utils/text';
 
 // ----------------------------------------------------------------------
 
 export default function BlogNewPostPage() {
   const { themeStretch } = useSettingsContext();
+  const { translate } = useLocales();
 
   return (
     <>
       <Helmet>
-        <title> Blog: New Post | Minimal UI</title>
+        <title>{capitalize(translate('new_post'))}</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Create a new post"
+          heading={capitalize(translate('new_post'))}
           links={[
             {
-              name: 'Dashboard',
-              href: PATH_DASHBOARD.root,
-            },
-            {
-              name: 'Blog',
+              name: capitalize(translate('posts')),
               href: PATH_DASHBOARD.blog.root,
             },
             {
-              name: 'Create',
+              name: capitalize(translate('new_post')),
             },
           ]}
         />

@@ -38,8 +38,6 @@ export default function BlogPostPage() {
 
   const { user } = useAuthContext();
 
-  console.log(user);
-
   const [post] = useGetPost({ id: title });
 
   const [recentPosts, setRecentPosts] = useState([]);
@@ -54,14 +52,12 @@ export default function BlogPostPage() {
 
   const [comments] = useGetAllCommentsByPost(title);
 
-  console.log(comments);
 
   const { translate } = useLocales();
 
   const getPostFunction = useCallback(async () => {
     try {
       const textUrl = post.content;
-      //acceder a textUrl y extraer el texto
       const response = await axios.get(textUrl);
       const text = response.data;
       setBody(text);
@@ -109,11 +105,7 @@ export default function BlogPostPage() {
           heading={capitalize(translate('post'))}
           links={[
             {
-              name: 'Dashboard',
-              href: PATH_DASHBOARD.root,
-            },
-            {
-              name: 'Blog',
+              name: capitalize(translate('posts')),
               href: PATH_DASHBOARD.blog.root,
             },
             {
@@ -219,7 +211,7 @@ export default function BlogPostPage() {
                 md: 'repeat(4, 1fr)',
               }}
             >
-              {recentPosts.slice(recentPosts.length - 4).map((recentPost) => (
+              {recentPosts.map((recentPost) => (
                 <BlogPostCard key={recentPost.id} post={recentPost} />
               ))}
             </Box>

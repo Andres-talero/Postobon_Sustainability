@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Avatar, SpeedDial, Typography, SpeedDialAction } from '@mui/material';
 // hooks
+// eslint-disable-next-line import/no-unresolved
+import { updateShare } from 'src/firebase/post';
 import useResponsive from '../../../hooks/useResponsive';
 // utils
 import { fDate } from '../../../utils/formatTime';
@@ -11,7 +13,6 @@ import { _socials } from '../../../_mock/arrays';
 // components
 import Image from '../../../components/image';
 import Iconify from '../../../components/iconify';
-
 // ----------------------------------------------------------------------
 
 const StyledOverlay = styled('div')(({ theme }) => ({
@@ -69,8 +70,40 @@ BlogPostHero.propTypes = {
 
 export default function BlogPostHero({ post }) {
   const { cover, title, author, createdAt } = post;
+  const { id, share } = post;
 
   const isDesktop = useResponsive('up', 'sm');
+
+  const shareBy = async (social) => {
+    switch (social.toLowerCase()) {
+      case 'facebook':
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`);
+        await updateShare(id, share);
+        break;
+      case 'twitter':
+        window.open(`https://twitter.com/intent/tweet?text=${title}&url=${window.location.href}`);
+        await updateShare(id, share);
+        break;
+      case 'instagram':
+        window.open(`https://www.instagram.com/?url=${window.location.href}`);
+        await updateShare(id, share);
+        break;
+      case 'pinterest':
+        window.open(
+          `http://pinterest.com/pin/create/button/?url=${window.location.href}&description=${title}&media=${cover}`
+        );
+        await updateShare(id, share);
+        break;
+      case 'linkedin':
+        window.open(
+          `https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}&title=${title}`
+        );
+        await updateShare(id, share + 1);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Box
@@ -113,6 +146,7 @@ export default function BlogPostHero({ post }) {
               tooltipTitle={action.name}
               tooltipPlacement="top"
               FabProps={{ color: 'default' }}
+              onClick={() => shareBy(action.name)}
             />
           ))}
         </SpeedDial>

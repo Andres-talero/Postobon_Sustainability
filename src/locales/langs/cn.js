@@ -56,6 +56,8 @@ const cn = {
   other_cases: `其他情况`,
   item_by_roles: `按角色逐项`,
   only_admin_can_see_this_item: `只有管理员可以看到这个项目`,
+  new_post: `新帖子`,
+  posts_management: `帖子管理`,
 };
 
 export default cn;

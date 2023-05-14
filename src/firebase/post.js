@@ -128,7 +128,6 @@ const updatePost = async ({
   }
 };
 
-//Api para actualizar el favorite de un post
 const updateFavorite = async (id, userID, favorite) => {
   try {
     const validate = await validateUserPost(id, userID);
@@ -139,20 +138,12 @@ const updateFavorite = async (id, userID, favorite) => {
         favorite: favorite + 1,
       });
       return response;
-    } else {
-      await updateUserPost(
-        validate[0].id,
-        id,
-        userID,
-        false,
-        validate[0].comment,
-        validate[0].view
-      );
-      const response = await updateDoc(doc(DB, 'posts', id), {
-        favorite: favorite - 1,
-      });
-      return response;
     }
+    await updateUserPost(validate[0].id, id, userID, false, validate[0].comment, validate[0].view);
+    const response = await updateDoc(doc(DB, 'posts', id), {
+      favorite: favorite - 1,
+    });
+    return response;
   } catch (error) {
     return { error: error.message };
   }
@@ -191,6 +182,7 @@ const validateUserPost = async (postID, userID) => {
   try {
     const q = query(collection(DB, 'post_user'), where('postID', '==', postID));
     const response = await getDocs(q);
+    // eslint-disable-next-line no-shadow
     const data = response.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     const userPost = data.filter((item) => item.userID === userID);
     return userPost;
@@ -209,12 +201,12 @@ const updateView = async (id, userID, view) => {
       });
       return response;
     }
+    return null;
   } catch (error) {
     return { error: error.message };
   }
 };
 
-//Crear un comentario
 const addComment = async (post, user, comment) => {
   try {
     const validate = await validateUserPost(post.id, user.uid);
@@ -249,6 +241,17 @@ const addComment = async (post, user, comment) => {
   }
 };
 
+const updateShare = async (id, share) => {
+  try {
+    const response = await updateDoc(doc(DB, 'posts', id), {
+      share: share + 1,
+    });
+    return response;
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
 export {
   addPost,
   getPost,
@@ -258,4 +261,5 @@ export {
   updateFavorite,
   updateView,
   addComment,
+  updateShare
 };

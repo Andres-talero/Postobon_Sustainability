@@ -7,6 +7,7 @@ import { Collapse } from '@mui/material';
 import useActiveLink from '../../../hooks/useActiveLink';
 //
 import NavItem from './NavItem';
+import ValidateRole from 'src/auth/ValidateRole';
 
 // ----------------------------------------------------------------------
 
@@ -68,14 +69,25 @@ NavSubList.propTypes = {
 function NavSubList({ data, depth }) {
   return (
     <>
-      {data.map((list) => (
-        <NavList
-          key={list.title + list.path}
-          data={list}
-          depth={depth + 1}
-          hasChild={!!list.children}
-        />
-      ))}
+      {data.map((list) =>
+        list.admin ? (
+          <ValidateRole Administrador key={list.title + list.path}>
+            <NavList
+              key={list.title + list.path}
+              data={list}
+              depth={depth + 1}
+              hasChild={!!list.children}
+            />
+          </ValidateRole>
+        ) : (
+          <NavList
+            key={list.title + list.path}
+            data={list}
+            depth={depth + 1}
+            hasChild={!!list.children}
+          />
+        )
+      )}
     </>
   );
 }

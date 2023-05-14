@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 // @mui
 import { List, Stack } from '@mui/material';
 // locales
+// eslint-disable-next-line import/no-unresolved
+import ValidateRole from 'src/auth/ValidateRole';
 import { useLocales } from '../../../locales';
 //
 import { StyledSubheader } from './styles';
 import NavList from './NavList';
-
 
 // ----------------------------------------------------------------------
 
@@ -25,17 +26,39 @@ export default function NavSectionVertical({ data, sx, ...other }) {
 
         return (
           <List key={key} disablePadding sx={{ px: 2 }}>
-            {group.subheader && (
-              <StyledSubheader disableSticky>{`${translate(group.subheader)}`}</StyledSubheader>
-            )}
+            {group.subheader &&
+              (group.admin ? (
+                <ValidateRole Administrador>
+                  <StyledSubheader disableSticky>{`${translate(group.subheader)}`}</StyledSubheader>
+                </ValidateRole>
+              ) : (
+                <ValidateRole User>
+                  <StyledSubheader disableSticky>{`${translate(group.subheader)}`}</StyledSubheader>
+                </ValidateRole>
+              ))}
 
             {group.items.map((list) => (
-              <NavList 
-                key={list.title + list.path}
-                data={list}
-                depth={1}
-                hasChild={!!list.children}
-              />
+              <div key={list.title + list.path}>
+                {list.admin ? (
+                  <ValidateRole Administrador>
+                    <NavList
+                      key={list.title + list.path}
+                      data={list}
+                      depth={1}
+                      hasChild={!!list.children}
+                    />
+                  </ValidateRole>
+                ) : (
+                  <ValidateRole User>
+                    <NavList
+                      key={list.title + list.path}
+                      data={list}
+                      depth={1}
+                      hasChild={!!list.children}
+                    />
+                  </ValidateRole>
+                )}
+              </div>
             ))}
           </List>
         );

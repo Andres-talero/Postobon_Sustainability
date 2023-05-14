@@ -50,7 +50,7 @@ const useGetAllCommentsByPost = (id) => {
     });
 
     return unsuscribe;
-  }, []);
+  }, [id]);
 
   return [comments, obtenerMasComments, hayMasPorCargar];
 };

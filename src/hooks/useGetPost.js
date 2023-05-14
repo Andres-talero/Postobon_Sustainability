@@ -15,7 +15,7 @@ const useGetPost = ({ id }) => {
     });
 
     return unsuscribe;
-  }, []);
+  }, [id]);
 
   console.log(post);
 

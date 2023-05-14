@@ -40,8 +40,9 @@ const navConfig = [
   // ----------------------------------------------------------------------
   {
     subheader: 'general',
+    admin: true,
     items: [
-      { title: 'app', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
+      { title: 'management', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard, admin: true },
       // { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
       // { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
       // { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
@@ -53,7 +54,8 @@ const navConfig = [
   // MANAGEMENT
   // ----------------------------------------------------------------------
   {
-    subheader: 'management',
+    subheader: 'posts_management',
+    admin: true,
     items: [
       // USER
       // {
@@ -103,10 +105,11 @@ const navConfig = [
         title: 'posts',
         path: PATH_DASHBOARD.blog.root,
         icon: ICONS.blog,
+        admin: true,
         children: [
-          { title: 'posts', path: PATH_DASHBOARD.blog.posts },
-          { title: 'post', path: PATH_DASHBOARD.blog.demoView },
-          { title: 'create', path: PATH_DASHBOARD.blog.new },
+          { title: 'posts', path: PATH_DASHBOARD.blog.posts, admin: false },
+          { title: 'post', path: PATH_DASHBOARD.blog.demoView, admin: false },
+          { title: 'create', path: PATH_DASHBOARD.blog.new, admin: true },
         ],
       },
       // {
@@ -117,32 +120,45 @@ const navConfig = [
     ],
   },
 
+  {
+    subheader: 'posts',
+    admin: false,
+    items: [
+      {
+        title: 'Publicaciones',
+        path: PATH_DASHBOARD.blog.root,
+        icon: ICONS.blog,
+        admin: false,
+      },
+    ],
+  },
+
   // APP
   // ----------------------------------------------------------------------
   // {
   //   subheader: 'app',
   //   items: [
-      // {
-      //   title: 'mail',
-      //   path: PATH_DASHBOARD.mail.root,
-      //   icon: ICONS.mail,
-      //   info: <Label color="error">+32</Label>,
-      // },
-      // {
-      //   title: 'chat',
-      //   path: PATH_DASHBOARD.chat.root,
-      //   icon: ICONS.chat,
-      // },
-      // {
-      //   title: 'calendar',
-      //   path: PATH_DASHBOARD.calendar,
-      //   icon: ICONS.calendar,
-      // },
-      // {
-      //   title: 'kanban',
-      //   path: PATH_DASHBOARD.kanban,
-      //   icon: ICONS.kanban,
-      // },
+  // {
+  //   title: 'mail',
+  //   path: PATH_DASHBOARD.mail.root,
+  //   icon: ICONS.mail,
+  //   info: <Label color="error">+32</Label>,
+  // },
+  // {
+  //   title: 'chat',
+  //   path: PATH_DASHBOARD.chat.root,
+  //   icon: ICONS.chat,
+  // },
+  // {
+  //   title: 'calendar',
+  //   path: PATH_DASHBOARD.calendar,
+  //   icon: ICONS.calendar,
+  // },
+  // {
+  //   title: 'kanban',
+  //   path: PATH_DASHBOARD.kanban,
+  //   icon: ICONS.kanban,
+  // },
   //   ],
   // },
 
