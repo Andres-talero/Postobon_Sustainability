@@ -14,6 +14,7 @@ import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField } from '../../components/hook-form';
+import { EcoBonApp } from 'src/EcoBon/EcoBon';
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +29,7 @@ export default function AuthLoginForm() {
   });
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
+    email: 'demo@ecobon.cc',
     password: 'demo1234',
   };
 
@@ -62,11 +63,11 @@ export default function AuthLoginForm() {
       <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name="email" label={EcoBonApp.placeHolderEmail} />
 
         <RHFTextField
           name="password"
-          label="Password"
+          label={EcoBonApp.placerHolderPassword}
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -88,7 +89,7 @@ export default function AuthLoginForm() {
           color="inherit"
           underline="always"
         >
-          Forgot password?
+          {EcoBonApp.forgotPassword}
         </Link>
       </Stack>
 
@@ -108,7 +109,7 @@ export default function AuthLoginForm() {
           },
         }}
       >
-        Login
+        {EcoBonApp.signInButton}
       </LoadingButton>
     </FormProvider>
   );

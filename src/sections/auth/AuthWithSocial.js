@@ -4,6 +4,7 @@ import { Divider, IconButton, Stack } from '@mui/material';
 import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
+import { EcoBonApp } from 'src/EcoBon/EcoBon';
 
 // ----------------------------------------------------------------------
 
@@ -55,7 +56,7 @@ export default function AuthWithSocial() {
           },
         }}
       >
-        OR
+        {EcoBonApp.orSignInWith}
       </Divider>
 
       <Stack direction="row" justifyContent="center" spacing={2}>

@@ -57,7 +57,6 @@ export default function NavVertical({ openNav, onCloseNav }) {
         }}
       >
         <Logo />
-
         <NavAccount />
       </Stack>
 

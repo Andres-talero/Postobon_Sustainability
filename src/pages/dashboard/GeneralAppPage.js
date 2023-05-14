@@ -29,6 +29,7 @@ import {
 } from '../../sections/@dashboard/general/app';
 // assets
 import { SeoIllustration } from '../../assets/illustrations';
+import { EcoBonApp } from 'src/EcoBon/EcoBon';
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +43,7 @@ export default function GeneralAppPage() {
   return (
     <>
       <Helmet>
-        <title> General: App | Minimal UI</title>
+        <title>{EcoBonApp.title}: Inicio</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
