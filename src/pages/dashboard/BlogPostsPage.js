@@ -16,9 +16,9 @@ import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../../sections/@dashboard/blog';
 import useGetAllPost from '../../hooks/useGetAllPosts';
-import { useLocales } from 'src/locales';
+import { useLocales } from '../../locales';
 import { capitalize } from '../../utils/text';
-import ValidateRole from 'src/auth/ValidateRole';
+import ValidateRole from '../../auth/ValidateRole';
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [

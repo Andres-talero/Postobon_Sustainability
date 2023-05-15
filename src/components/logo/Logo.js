@@ -5,6 +5,9 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, Link } from '@mui/material';
 
 // ----------------------------------------------------------------------
+Logo.propTypes = {
+  src: PropTypes.string,
+};
 
 const Logo = forwardRef(({ disabledLink = false, sx, src, ...other }, ref) => {
   const logo = (

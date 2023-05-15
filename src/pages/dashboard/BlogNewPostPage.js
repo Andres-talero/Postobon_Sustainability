@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 // @mui
 import { Container } from '@mui/material';
 // routes
-import { useLocales } from 'src/locales';
+import { useLocales } from '../../locales';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import { useSettingsContext } from '../../components/settings';

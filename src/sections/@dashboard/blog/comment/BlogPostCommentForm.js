@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 // form
 import { useForm } from 'react-hook-form';
@@ -7,9 +8,14 @@ import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import FormProvider, { RHFTextField } from '../../../../components/hook-form';
-import { addComment } from "../../../../firebase/post"
+import { addComment } from '../../../../firebase/post';
 
 // ----------------------------------------------------------------------
+
+BlogPostCommentForm.propTypes = {
+  post: PropTypes.object,
+  user: PropTypes.object,
+};
 
 export default function BlogPostCommentForm({ post, user }) {
   const CommentSchema = Yup.object().shape({

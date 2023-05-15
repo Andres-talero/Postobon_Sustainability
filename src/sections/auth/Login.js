@@ -10,7 +10,7 @@ import LoginLayout from '../../layouts/login';
 //
 import AuthLoginForm from './AuthLoginForm';
 import AuthWithSocial from './AuthWithSocial';
-import { EcoBonApp } from 'src/EcoBon/EcoBon';
+import { EcoBonApp } from '../../EcoBon/EcoBon';
 
 // ----------------------------------------------------------------------
 

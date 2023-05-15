@@ -17,6 +17,7 @@ const ValidateRole = (props) => {
       }
     }
   }
+  return propsR.children;
 };
 
 export default ValidateRole;

@@ -6,12 +6,13 @@ import { fShortenNumber } from '../../../utils/formatNumber';
 // components
 import Iconify from '../../../components/iconify';
 import { CustomAvatarGroup } from '../../../components/custom-avatar';
-import { updateFavorite } from 'src/firebase/post';
+import { updateFavorite } from '../../../firebase/post';
 
 // ----------------------------------------------------------------------
 
 BlogPostTags.propTypes = {
   post: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default function BlogPostTags({ post, user }) {

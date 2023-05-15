@@ -14,7 +14,7 @@ import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField } from '../../components/hook-form';
-import { EcoBonApp } from 'src/EcoBon/EcoBon';
+import { EcoBonApp } from '../../EcoBon/EcoBon';
 
 // ----------------------------------------------------------------------
 

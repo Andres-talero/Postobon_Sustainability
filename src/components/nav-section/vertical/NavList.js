@@ -7,7 +7,7 @@ import { Collapse } from '@mui/material';
 import useActiveLink from '../../../hooks/useActiveLink';
 //
 import NavItem from './NavItem';
-import ValidateRole from 'src/auth/ValidateRole';
+import ValidateRole from '../../../auth/ValidateRole';
 
 // ----------------------------------------------------------------------
 

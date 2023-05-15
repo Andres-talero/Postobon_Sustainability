@@ -13,11 +13,11 @@ import Markdown from '../../components/markdown';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import { useSettingsContext } from '../../components/settings';
 import { SkeletonPostDetails } from '../../components/skeleton';
-import { useLocales } from 'src/locales';
+import { useLocales } from '../../locales';
 // sections
 import {
   BlogPostHero,
-  BlogPostTags, 
+  BlogPostTags,
   BlogPostCard,
   BlogPostCommentList,
   BlogPostCommentForm,
@@ -51,7 +51,6 @@ export default function BlogPostPage() {
   const [posts] = useGetRecentPosts();
 
   const [comments] = useGetAllCommentsByPost(title);
-
 
   const { translate } = useLocales();
 
