@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, onSnapshot, query, orderBy, limit, startAfter } from 'firebase/firestore';
+import { collection, onSnapshot, query, limit, startAfter } from 'firebase/firestore';
 import { DB } from '../auth/FirebaseContext';
 
 const useGetAllPost = () => {

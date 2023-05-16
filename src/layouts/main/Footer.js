@@ -3,8 +3,6 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { Box, Grid, Link, Stack, Divider, Container, Typography, IconButton } from '@mui/material';
 // routes
 import { PATH_PAGE } from '../../routes/paths';
-// _mock
-import { _socials } from '../../_mock/arrays';
 // components
 import Logo from '../../components/logo';
 import Iconify from '../../components/iconify';
@@ -13,28 +11,24 @@ import { EcoBonApp } from '../../EcoBon/EcoBon';
 // ----------------------------------------------------------------------
 
 const LINKS = [
-  {
-    headline: 'Minimal',
-    children: [
-      { name: 'About us', href: PATH_PAGE.about },
-      { name: 'Contact us', href: PATH_PAGE.contact },
-      { name: 'FAQs', href: PATH_PAGE.faqs },
-    ],
-  },
-  {
-    headline: 'Legal',
-    children: [
-      { name: 'Terms and Condition', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
-    ],
-  },
-  {
-    headline: 'Contact',
-    children: [
-      { name: 'support@minimals.cc', href: '#' },
-      { name: 'Los Angeles, 359  Hidden Valley Road', href: '#' },
-    ],
-  },
+  // {
+  //   headline: 'Minimal',
+  //   children: [{ name: 'Sobre EcoBón', href: PATH_PAGE.about }],
+  // },
+  // {
+  //   headline: 'Proyecto',
+  //   children: [
+  //     { name: 'Terms and Condition', href: '#' },z
+  //     { name: 'Privacy Policy', href: '#' },
+  //   ],
+  // },
+  // {
+  //   headline: 'Contact',
+  //   children: [
+  //     { name: 'support@minimals.cc', href: '#' },
+  //     { name: 'Los Angeles, 359  Hidden Valley Road', href: '#' },
+  //   ],
+  // },
 ];
 
 // ----------------------------------------------------------------------
@@ -97,25 +91,8 @@ export default function Footer() {
 
           <Grid item xs={8} md={3}>
             <Typography variant="body2" sx={{ pr: { md: 5 } }}>
-              The starting point for your next project with Minimal UI Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
+              El punto de entrada para aprender de forma sustentable.
             </Typography>
-
-            <Stack
-              spacing={1}
-              direction="row"
-              justifyContent={{ xs: 'center', md: 'flex-start' }}
-              sx={{
-                mt: 5,
-                mb: { xs: 5, md: 0 },
-              }}
-            >
-              {_socials.map((social) => (
-                <IconButton key={social.name}>
-                  <Iconify icon={social.icon} />
-                </IconButton>
-              ))}
-            </Stack>
           </Grid>
 
           <Grid item xs={12} md={7}>

@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title> The starting point for your next project | Minimal UI</title>
+        <title>EcoBón, Donde aprender es sustentable.</title>
       </Helmet>
 
       <ScrollProgress />
