@@ -3,7 +3,7 @@ import { m } from 'framer-motion';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Card, Container, Typography, Stack } from '@mui/material';
 // ecobon
-import { EcoBonApp } from '../../EcoBon/EcoBon';
+// import { EcoBonApp } from '../../EcoBon/EcoBon';
 // components
 import Image from '../../components/image';
 import { MotionViewport, varFade } from '../../components/animate';
@@ -18,7 +18,7 @@ const CARDS = [
   },
   {
     icon: ' /assets/icons/home/ic_leaf.svg',
-    title: 'UI & UX Design',
+    title: 'Sostenibilidad',
     description: 'Conocer más de la cultura sostenible.',
   },
   {

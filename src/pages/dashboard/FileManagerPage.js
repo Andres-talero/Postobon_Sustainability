@@ -187,7 +187,7 @@ export default function FileManagerPage() {
   return (
     <>
       <Helmet>
-        <title> File Manager | Minimal UI</title>
+        <title> File Manager | EcoBón</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>

@@ -119,7 +119,7 @@ export default function EcommerceProductDetailsPage() {
   return (
     <>
       <Helmet>
-        <title>{`${product?.name || ''} | Minimal UI`}</title>
+        <title>{`${product?.name || ''} | EcoBón`}</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -201,7 +201,7 @@ export default function EcommerceProductDetailsPage() {
 
               <Divider />
 
-             {TABS.map(
+              {TABS.map(
                 (tab) =>
                   tab.value === currentTab && (
                     <Box
@@ -215,7 +215,7 @@ export default function EcommerceProductDetailsPage() {
                       {tab.component}
                     </Box>
                   )
-              )} 
+              )}
             </Card>
           </>
         )}

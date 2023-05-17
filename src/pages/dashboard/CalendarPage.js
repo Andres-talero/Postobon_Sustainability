@@ -243,7 +243,7 @@ export default function CalendarPage() {
   return (
     <>
       <Helmet>
-        <title> Calendar | Minimal UI</title>
+        <title> Calendar | EcoBón</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

@@ -17,18 +17,18 @@ export default function ResetPasswordPage() {
   return (
     <>
       <Helmet>
-        <title> Reset Password | Minimal UI</title>
+        <title> Reset Password | EcoBón</title>
       </Helmet>
 
       <PasswordIcon sx={{ mb: 5, height: 96 }} />
 
       <Typography variant="h3" paragraph>
-        Forgot your password?
+        ¿Olvidaste tu clave?
       </Typography>
 
       <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-        Please enter the email address associated with your account and We will email you a link to
-        reset your password.
+        Ingrese la dirección de correo electrónico asociada con su cuenta y le enviaremos un enlace
+        para restablecer su contraseña.
       </Typography>
 
       <AuthResetPasswordForm />
@@ -46,7 +46,7 @@ export default function ResetPasswordPage() {
         }}
       >
         <Iconify icon="eva:chevron-left-fill" width={16} />
-        Return to sign in
+        Inicio de Sesión
       </Link>
     </>
   );

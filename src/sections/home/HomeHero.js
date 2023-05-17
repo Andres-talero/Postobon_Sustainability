@@ -1,13 +1,14 @@
 import { m, useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled, alpha, useTheme } from '@mui/material/styles';
-import { Button, Box, Link, Container, Typography, Stack, Grid, Rating } from '@mui/material';
+import { Box, Container, Typography, Stack, Grid } from '@mui/material';
+// import { Button, Box, Link, Container, Typography, Stack, Grid, Rating } from '@mui/material';
 // ecobone
 import { EcoBonApp } from '../../EcoBon/EcoBon';
 // routes
-import { PATH_DASHBOARD, PATH_FIGMA_PREVIEW, PATH_FREE_VERSION } from '../../routes/paths';
+// import { PATH_DASHBOARD, PATH_FIGMA_PREVIEW, PATH_FREE_VERSION } from '../../routes/paths';
 // hooks
 import useResponsive from '../../hooks/useResponsive';
 // utils
@@ -16,7 +17,7 @@ import { textGradient, bgGradient } from '../../utils/cssStyles';
 import { HEADER } from '../../config-global';
 // components
 import SvgColor from '../../components/svg-color';
-import Iconify from '../../components/iconify';
+// import Iconify from '../../components/iconify';
 import { MotionContainer, varFade } from '../../components/animate';
 
 // ----------------------------------------------------------------------
@@ -209,25 +210,6 @@ function Content() {
         mt: `${HEADER.H_MAIN_DESKTOP}px`,
       }}
     >
-      <Stack component={m.div} variants={varFade().in} sx={{ width: 344, position: 'relative' }}>
-        <Box
-          component={m.img}
-          animate={{ y: ['0%', '100%'] }}
-          transition={transition}
-          alt={`hero_${isLight ? 'light' : 'dark'}_1`}
-          src={`/assets/images/home/hero_${isLight ? 'light' : 'dark'}_1.png`}
-          sx={{ position: 'absolute' }}
-        />
-        <Box
-          component={m.img}
-          animate={{ y: ['-100%', '0%'] }}
-          transition={transition}
-          alt={`hero_${isLight ? 'light' : 'dark'}_1`}
-          src={`/assets/images/home/hero_${isLight ? 'light' : 'dark'}_1.png`}
-          sx={{ position: 'absolute' }}
-        />
-      </Stack>
-
       <Stack
         component={m.div}
         variants={varFade().in}

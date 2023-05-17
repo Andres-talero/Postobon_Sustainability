@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { collection, onSnapshot, query, orderBy, limit, startAfter } from 'firebase/firestore';
+import { collection, onSnapshot, query, limit } from 'firebase/firestore';
 import { DB } from '../auth/FirebaseContext';
 
 const useGetRecentPosts = () => {
   const [posts, setPosts] = useState([]);
   const [ultimoDato, setUltimoDato] = useState(null);
   const [hayMasPorCargar, cambiarhayMasPorCargar] = useState(false);
-
 
   useEffect(() => {
     const consulta = query(collection(DB, 'posts'), limit(4));

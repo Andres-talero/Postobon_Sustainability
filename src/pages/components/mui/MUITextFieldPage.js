@@ -26,7 +26,7 @@ export default function MUITextFieldPage() {
   return (
     <>
       <Helmet>
-        <title> MUI Components: Textfield | Minimal UI</title>
+        <title> MUI Components: Textfield | EcoBón</title>
       </Helmet>
 
       <Box

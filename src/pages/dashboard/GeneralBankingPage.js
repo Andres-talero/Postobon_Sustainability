@@ -30,7 +30,7 @@ export default function GeneralBankingPage() {
   return (
     <>
       <Helmet>
-        <title> General: Banking | Minimal UI</title>
+        <title> General: Banking | EcoBón</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

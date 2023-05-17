@@ -79,7 +79,7 @@ export default function GeneralFilePage() {
 
   const handleDrop = useCallback(
     (acceptedFiles) => {
-      console.log("Estoy seteando la imagen en el blob 6");
+      console.log('Estoy seteando la imagen en el blob 6');
       const newFiles = acceptedFiles.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
@@ -129,7 +129,7 @@ export default function GeneralFilePage() {
   return (
     <>
       <Helmet>
-        <title> General: File | Minimal UI</title>
+        <title> General: File | EcoBón</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>

@@ -59,7 +59,6 @@ export default function Header() {
 
           <Button
             variant="contained"
-            target="_blank"
             rel="noopener"
             href={PATH_AUTH.loginUnprotected}
           >

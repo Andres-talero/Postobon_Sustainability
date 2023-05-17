@@ -33,7 +33,7 @@ export default function DemoAnimatePage() {
   return (
     <>
       <Helmet>
-        <title> Extra Components: Animate | Minimal UI</title>
+        <title> Extra Components: Animate | EcoBón</title>
       </Helmet>
 
       <Box

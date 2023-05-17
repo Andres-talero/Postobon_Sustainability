@@ -6,7 +6,6 @@ import {
   addDoc,
   getDoc,
   doc,
-  deleteDoc,
   updateDoc,
   query,
   where,
@@ -192,4 +191,12 @@ const updateRating = async (courseID, userID, rating) => {
   }
 };
 
-export { addCourse, getCourse, getAllCourse, updateCourseReview, updateView, updateRating };
+export {
+  addCourse,
+  getCourse,
+  getAllCourse,
+  updateCourseReview,
+  updateView,
+  updateRating,
+  updateUserCourse,
+};

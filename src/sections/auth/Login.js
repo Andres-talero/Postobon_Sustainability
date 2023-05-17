@@ -16,6 +16,7 @@ import { EcoBonApp } from '../../EcoBon/EcoBon';
 
 export default function Login() {
   const { method } = useAuthContext();
+  const COLORS = ['info'];
 
   return (
     <LoginLayout>
@@ -31,9 +32,16 @@ export default function Login() {
         </Stack>
       </Stack>
 
-      <AuthLoginForm />
+      <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
+        {COLORS.map((color) => (
+          <Alert key={color} severity={color} onClose={() => {}}>
+            Correo de Prueba: <strong>demo@ecobon.com</strong>&nbsp;/&nbsp;Password:{' '}
+            <strong>demo1234</strong>
+          </Alert>
+        ))}
+      </Stack>
 
-      <AuthWithSocial />
+      <AuthLoginForm />
     </LoginLayout>
   );
 }

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { paramCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { alpha, styled } from '@mui/material/styles';
@@ -38,10 +37,8 @@ BlogPostCard.propTypes = {
 export default function BlogPostCard({ post, index }) {
   const isDesktop = useResponsive('up', 'md');
 
-  const { cover, title, view, comment, share, author, createdAt } = post;
+  const { id, cover, title, view, comment, share, author, createdAt } = post;
   const imageRute = cover.preview;
-
-  const id = post.id;
 
   console.log(id);
 

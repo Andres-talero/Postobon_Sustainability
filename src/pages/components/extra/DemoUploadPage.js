@@ -36,7 +36,7 @@ export default function DemoUploadPage() {
   const handleDropSingleFile = useCallback((acceptedFiles) => {
     const newFile = acceptedFiles[0];
     if (newFile) {
-      console.log("Estoy seteando la imagen en el blob 5");
+      console.log('Estoy seteando la imagen en el blob 5');
       setFile(
         Object.assign(newFile, {
           preview: URL.createObjectURL(newFile),
@@ -82,7 +82,7 @@ export default function DemoUploadPage() {
   return (
     <>
       <Helmet>
-        <title> Extra Components: Upload | Minimal UI</title>
+        <title> Extra Components: Upload | EcoBón</title>
       </Helmet>
 
       <Box
