@@ -18,6 +18,9 @@ import {
   AnalyticsCurrentSubject,
   AnalyticsConversionRates,
 } from '../../sections/@dashboard/general/analytics';
+import useGetViewsOfCourse from '../../hooks/useGetViewsOfCourses';
+import useGetStadistics from '../../hooks/useGetStadistics';
+import useGetViewsOfPosts from '../../hooks/useGetViewsOfPosts';
 
 // ----------------------------------------------------------------------
 
@@ -26,10 +29,23 @@ export default function GeneralAnalyticsPage() {
 
   const { themeStretch } = useSettingsContext();
 
+  const [courseViews] = useGetViewsOfCourse();
+
+  const [userAmount, coursesAmount, postsAmount, viewPostAmount] = useGetStadistics();
+
+  const [postViews] = useGetViewsOfPosts();
+
+  console.log(postViews);
+
+  const maxValue = (array) => {
+    const high = array.reduce((max, obj) => (obj.value > max.value ? obj : max));
+    return `El curso ${high.name} tuvo la mayor cantidad de vistas, siendo estas de ${high.value} vistas`;
+  };
+
   return (
     <>
       <Helmet>
-        <title> General: Analytics | Minimal UI</title>
+        <title>Analytics</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -40,38 +56,69 @@ export default function GeneralAnalyticsPage() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="Weekly Sales"
-              total={714000}
-              icon="ant-design:android-filled"
+              title="User Amount"
+              total={userAmount}
+              icon="ant-design:user-outlined"
             />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="New Users"
-              total={1352831}
+              title="Courses Amount"
+              total={coursesAmount}
               color="info"
-              icon="ant-design:apple-filled"
+              icon="ant-design:book-outlined"
             />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="Item Orders"
-              total={1723315}
+              title="Posts Amount"
+              total={postsAmount}
               color="warning"
-              icon="ant-design:windows-filled"
+              icon="ant-design:file-outlined"
             />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="Bug Reports"
-              total={234}
+              title="View Posts Amount"
+              total={viewPostAmount}
               color="error"
-              icon="ant-design:bug-filled"
+              icon="ant-design:eye-outlined"
             />
           </Grid>
+
+          <Grid item xs={12} md={6} lg={8}>
+            {courseViews !== null && (
+              <AnalyticsConversionRates
+                title="Course Views"
+                subheader={maxValue(courseViews)}
+                chart={{
+                  series: courseViews,
+                }}
+              />
+            )}
+          </Grid>
+
+          <Grid item xs={12} md={6} lg={4}>
+            {postViews !== null && (
+              <AnalyticsCurrentVisits
+                title="Post Views"
+                chart={{
+                  series: postViews,
+                  colors: [
+                    theme.palette.primary.main,
+                    theme.palette.info.main,
+                    theme.palette.error.main,
+                    theme.palette.warning.main,
+                  ],
+                }}
+              />
+            )}
+          </Grid>
+
+          {/*
 
           <Grid item xs={12} md={6} lg={8}>
             <AnalyticsWebsiteVisits
@@ -116,47 +163,6 @@ export default function GeneralAnalyticsPage() {
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            <AnalyticsCurrentVisits
-              title="Current Visits"
-              chart={{
-                series: [
-                  { label: 'America', value: 4344 },
-                  { label: 'Asia', value: 5435 },
-                  { label: 'Europe', value: 1443 },
-                  { label: 'Africa', value: 4443 },
-                ],
-                colors: [
-                  theme.palette.primary.main,
-                  theme.palette.info.main,
-                  theme.palette.error.main,
-                  theme.palette.warning.main,
-                ],
-              }}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={8}>
-            <AnalyticsConversionRates
-              title="Conversion Rates"
-              subheader="(+43%) than last year"
-              chart={{
-                series: [
-                  { label: 'Italy', value: 400 },
-                  { label: 'Japan', value: 430 },
-                  { label: 'China', value: 448 },
-                  { label: 'Canada', value: 470 },
-                  { label: 'France', value: 540 },
-                  { label: 'Germany', value: 580 },
-                  { label: 'South Korea', value: 690 },
-                  { label: 'Netherlands', value: 1100 },
-                  { label: 'United States', value: 1200 },
-                  { label: 'United Kingdom', value: 1380 },
-                ],
-              }}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
             <AnalyticsCurrentSubject
               title="Current Subject"
               chart={{
@@ -176,13 +182,13 @@ export default function GeneralAnalyticsPage() {
 
           <Grid item xs={12} md={6} lg={4}>
             <AnalyticsOrderTimeline title="Order Timeline" list={_analyticOrderTimeline} />
-          </Grid>
-
+          </Grid> */}
+          {/* 
           <Grid item xs={12} md={6} lg={4}>
             <AnalyticsTrafficBySite title="Traffic by Site" list={_analyticTraffic} />
-          </Grid>
+          </Grid> */}
 
-          <Grid item xs={12} md={6} lg={8}>
+          {/* <Grid item xs={12} md={6} lg={8}>
             <AnalyticsTasks
               title="Tasks"
               list={[
@@ -193,7 +199,7 @@ export default function GeneralAnalyticsPage() {
                 { id: '5', label: 'Sprint Showcase' },
               ]}
             />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </>

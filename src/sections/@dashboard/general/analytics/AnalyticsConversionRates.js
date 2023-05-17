@@ -38,7 +38,7 @@ export default function AnalyticsConversionRates({ title, subheader, chart, ...o
       },
     },
     xaxis: {
-      categories: series.map((i) => i.label),
+      categories: series.map((i) => i.name),
     },
     ...options,
   });

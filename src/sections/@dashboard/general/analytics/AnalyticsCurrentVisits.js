@@ -53,7 +53,7 @@ export default function AnalyticsCurrentVisits({ title, subheader, chart, ...oth
       },
     },
     colors,
-    labels: series.map((i) => i.label),
+    labels: series.map((i) => i.name),
     stroke: {
       colors: [theme.palette.background.paper],
     },

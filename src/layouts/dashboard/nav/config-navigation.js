@@ -42,8 +42,8 @@ const navConfig = [
     subheader: 'general',
     admin: true,
     items: [
-      { title: 'management', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard, admin: true },
-      { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce, admin: true },
+      // { title: 'management', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard, admin: true },
+      // { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce, admin: true },
        { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics, admin: true },
       // { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
       // { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
