@@ -36,19 +36,13 @@ export default function AboutHero() {
       <Container component={MotionContainer}>
         <StyledContent>
           <TextAnimate
-            text="Who"
+            text="¿Quienes Somos?"
             sx={{
               color: 'primary.main',
             }}
             variants={varFade().inRight}
           />
-
           <br />
-
-          <Stack spacing={2} display="inline-flex" direction="row" sx={{ color: 'common.white' }}>
-            <TextAnimate text="we" />
-            <TextAnimate text="are?" />
-          </Stack>
 
           <m.div variants={varFade().inRight}>
             <Typography
@@ -59,8 +53,8 @@ export default function AboutHero() {
                 fontWeight: 'fontWeightMedium',
               }}
             >
-              Let&apos;s work together and
-              <br /> make awesome site easily
+              Empecemos a trabajar juntos y
+              <br /> aprendamos de sostenibilidad de forma fácil.
             </Typography>
           </m.div>
         </StyledContent>
