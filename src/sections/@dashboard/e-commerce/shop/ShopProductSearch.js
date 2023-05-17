@@ -49,7 +49,7 @@ export default function ShopProductSearch() {
   };
 
   const handleGotoProduct = (name) => {
-    navigate(PATH_DASHBOARD.eCommerce.view(paramCase(name)));
+    navigate(PATH_DASHBOARD.eCommerce.view(name));
   };
 
   const handleKeyUp = (event) => {
@@ -99,7 +99,7 @@ export default function ShopProductSearch() {
         />
       )}
       renderOption={(props, product, { inputValue }) => {
-        const { name, cover } = product;
+        const { name, cover, id } = product;
         const matches = match(name, inputValue);
         const parts = parse(name, matches);
 
@@ -111,7 +111,7 @@ export default function ShopProductSearch() {
               sx={{ width: 48, height: 48, borderRadius: 1, flexShrink: 0, mr: 1.5 }}
             />
 
-            <Link underline="none" onClick={() => handleGotoProduct(name)}>
+            <Link underline="none" onClick={() => handleGotoProduct(id)}>
               {parts.map((part, index) => (
                 <Typography
                   key={index}

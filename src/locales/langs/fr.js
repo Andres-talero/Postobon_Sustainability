@@ -58,6 +58,13 @@ const fr = {
   only_admin_can_see_this_item: `seul l'administrateur peut voir cet élément`,
   new_post: `nouveau post`,
   posts_management: `gestion des publications`,
+  hi_welcome_back: `Bonjour, bienvenue`,
+  user_amount: `montant de l'utilisateur`,
+  course_amount: `montant du cours`,
+  post_amount: `montant de poste`,
+  view_post_amount: `voir le montant du poste`,
+  course_views: `vues de cours`,
+  post_views: `vues de poste`,
 };
 
 export default fr;

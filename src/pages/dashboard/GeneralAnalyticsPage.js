@@ -21,13 +21,16 @@ import {
 import useGetViewsOfCourse from '../../hooks/useGetViewsOfCourses';
 import useGetStadistics from '../../hooks/useGetStadistics';
 import useGetViewsOfPosts from '../../hooks/useGetViewsOfPosts';
-
+import { useLocales } from '../../locales';
+import { capitalize } from '../../utils/text';
 // ----------------------------------------------------------------------
 
 export default function GeneralAnalyticsPage() {
   const theme = useTheme();
 
   const { themeStretch } = useSettingsContext();
+
+  const { translate } = useLocales();
 
   const [courseViews] = useGetViewsOfCourse();
 
@@ -50,13 +53,13 @@ export default function GeneralAnalyticsPage() {
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
+          {capitalize(translate('hi_welcome_back'))}
         </Typography>
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="User Amount"
+              title={capitalize(translate('user_amount'))}
               total={userAmount}
               icon="ant-design:user-outlined"
             />
@@ -64,7 +67,7 @@ export default function GeneralAnalyticsPage() {
 
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="Courses Amount"
+              title={capitalize(translate('course_amount'))}
               total={coursesAmount}
               color="info"
               icon="ant-design:book-outlined"
@@ -73,7 +76,7 @@ export default function GeneralAnalyticsPage() {
 
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="Posts Amount"
+              title={capitalize(translate('post_amount'))}
               total={postsAmount}
               color="warning"
               icon="ant-design:file-outlined"
@@ -82,7 +85,7 @@ export default function GeneralAnalyticsPage() {
 
           <Grid item xs={12} sm={6} md={3}>
             <AnalyticsWidgetSummary
-              title="View Posts Amount"
+              title={capitalize(translate('view_post_amount'))}
               total={viewPostAmount}
               color="error"
               icon="ant-design:eye-outlined"
@@ -92,7 +95,7 @@ export default function GeneralAnalyticsPage() {
           <Grid item xs={12} md={6} lg={8}>
             {courseViews !== null && (
               <AnalyticsConversionRates
-                title="Course Views"
+                title={capitalize(translate('course_views'))}
                 subheader={maxValue(courseViews)}
                 chart={{
                   series: courseViews,
@@ -104,7 +107,7 @@ export default function GeneralAnalyticsPage() {
           <Grid item xs={12} md={6} lg={4}>
             {postViews !== null && (
               <AnalyticsCurrentVisits
-                title="Post Views"
+                title={capitalize(translate('post_views'))}
                 chart={{
                   series: postViews,
                   colors: [

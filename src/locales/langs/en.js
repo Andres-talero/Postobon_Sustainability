@@ -58,6 +58,13 @@ const en = {
   only_admin_can_see_this_item: `Only admin can see this item`,
   new_post: `new post`,
   posts_management: `posts management`,
+  hi_welcome_back: `Hi, Welcome back`,
+  user_amount: `user amount`,
+  course_amount: `course amount`,
+  post_amount: `post amount`,
+  view_post_amount: `view post amount`,
+  course_views: `course views`,
+  post_views: `post views`,
 };
 
 export default en;

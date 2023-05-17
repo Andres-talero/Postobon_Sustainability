@@ -48,7 +48,7 @@ export default function AuthLoginForm() {
   const onSubmit = async (data) => {
     try {
       await login(data.email, data.password);
-      window.location.href = '/dashboard';
+      window.location.href = '/dashboard/analytics';
     } catch (error) {
       console.error(error);
       setError('afterSubmit', {

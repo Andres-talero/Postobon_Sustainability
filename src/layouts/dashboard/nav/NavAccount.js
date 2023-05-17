@@ -25,7 +25,7 @@ export default function NavAccount() {
   const { user } = useAuthContext();
 
   return (
-    <Link component={RouterLink} to={PATH_DASHBOARD.user.account} underline="none" color="inherit">
+    // <Link component={RouterLink} to={PATH_DASHBOARD.user.account} underline="none" color="inherit">
       <StyledRoot>
         <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} />
 
@@ -39,6 +39,6 @@ export default function NavAccount() {
           </Typography>
         </Box>
       </StyledRoot>
-    </Link>
+    // </Link>
   );
 }
