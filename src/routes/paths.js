@@ -90,9 +90,9 @@ export const PATH_DASHBOARD = {
   },
   blog: {
     root: path(ROOTS_DASHBOARD, '/blog'),
-    posts: path(ROOTS_DASHBOARD, '/blog/posts'),
-    new: path(ROOTS_DASHBOARD, '/blog/new'),
-    view: (title) => path(ROOTS_DASHBOARD, `/blog/post/${title}`),
+    posts: (id) => path(ROOTS_DASHBOARD, `/blog/posts/${id}`),
+    new: (id) => path(ROOTS_DASHBOARD, `/blog/new/${id}`),
+    view: (id) => path(ROOTS_DASHBOARD, `/blog/post/${id}`),
     demoView: path(ROOTS_DASHBOARD, '/blog/post/f0GVK2VryiXkiPmO07m3'),
   },
 };

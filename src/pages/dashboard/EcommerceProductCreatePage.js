@@ -22,14 +22,13 @@ export default function EcommerceProductCreatePage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Create a new product"
+          heading="Create a new course"
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
             {
-              name: 'E-Commerce',
+              name: 'Courses',
               href: PATH_DASHBOARD.eCommerce.root,
             },
-            { name: 'New product' },
+            { name: 'New' },
           ]}
         />
         <ProductNewEditForm />

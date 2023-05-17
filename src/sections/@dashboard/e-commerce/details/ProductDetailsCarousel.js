@@ -152,38 +152,38 @@ export default function ProductDetailsCarousel({ product }) {
         ))}
       </Carousel>
 
-      <CarouselArrowIndex
+      {/* <CarouselArrowIndex
         index={currentIndex}
         total={product.images.length}
         onNext={handleNext}
         onPrevious={handlePrev}
-      />
+      /> */}
     </Box>
   );
 
-  const renderThumbnails = (
-    <StyledThumbnailsContainer length={product.images.length}>
-      <Carousel {...carouselSettings2} asNavFor={nav1} ref={carousel2}>
-        {product.images.map((img, index) => (
-          <Image
-            key={img}
-            disabledEffect
-            alt="thumbnail"
-            src={img}
-            sx={{
-              width: THUMB_SIZE,
-              height: THUMB_SIZE,
-              borderRadius: 1.5,
-              cursor: 'pointer',
-              ...(currentIndex === index && {
-                border: `solid 2px ${theme.palette.primary.main}`,
-              }),
-            }}
-          />
-        ))}
-      </Carousel>
-    </StyledThumbnailsContainer>
-  );
+  // const renderThumbnails = (
+  //   <StyledThumbnailsContainer length={product.images.length}>
+  //     <Carousel {...carouselSettings2} asNavFor={nav1} ref={carousel2}>
+  //       {product.images.map((img, index) => (
+  //         <Image
+  //           key={img}
+  //           disabledEffect
+  //           alt="thumbnail"
+  //           src={img}
+  //           sx={{
+  //             width: THUMB_SIZE,
+  //             height: THUMB_SIZE,
+  //             borderRadius: 1.5,
+  //             cursor: 'pointer',
+  //             ...(currentIndex === index && {
+  //               border: `solid 2px ${theme.palette.primary.main}`,
+  //             }),
+  //           }}
+  //         />
+  //       ))}
+  //     </Carousel>
+  //   </StyledThumbnailsContainer>
+  // );
 
   return (
     <>
@@ -196,7 +196,7 @@ export default function ProductDetailsCarousel({ product }) {
       >
         {renderLargeImg}
 
-        {renderThumbnails}
+        {/* {renderThumbnails} */}
       </Box>
 
       <Lightbox

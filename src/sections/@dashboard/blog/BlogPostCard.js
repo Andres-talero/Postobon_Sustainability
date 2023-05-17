@@ -124,12 +124,12 @@ export default function BlogPostCard({ post, index }) {
 // ----------------------------------------------------------------------
 PostContent.propTypes = {
   title: PropTypes.string,
-  view: PropTypes.string,
+  view: PropTypes.any,
   comment: PropTypes.number,
   share: PropTypes.number,
   createdAt: PropTypes.any,
   index: PropTypes.number,
-  idPost: PropTypes.number,
+  idPost: PropTypes.string,
 };
 export function PostContent({ title, view, comment, share, createdAt, index, idPost }) {
   const isDesktop = useResponsive('up', 'md');

@@ -18,14 +18,14 @@ import useGetAllPosts from '../../../../hooks/useGetAllPosts';
 
 // ----------------------------------------------------------------------
 
-export default function BlogPostsSearch() {
+export default function BlogPostsSearch(postId) {
   const navigate = useNavigate();
 
   const [searchPosts, setSearchPosts] = useState('');
 
   const [searchResults, setSearchResults] = useState([]);
 
-  const [posts] = useGetAllPosts();
+  const [posts] = useGetAllPosts(postId);
 
   const handleSearchPosts = async (value) => {
     try {

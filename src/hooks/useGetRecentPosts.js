@@ -7,6 +7,7 @@ const useGetRecentPosts = () => {
   const [ultimoDato, setUltimoDato] = useState(null);
   const [hayMasPorCargar, cambiarhayMasPorCargar] = useState(false);
 
+
   useEffect(() => {
     const consulta = query(collection(DB, 'posts'), limit(4));
 

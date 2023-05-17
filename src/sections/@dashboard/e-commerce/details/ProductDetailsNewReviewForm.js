@@ -17,21 +17,28 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
+import { useAuthContext } from '../../../../auth/useAuthContext';
 import FormProvider, { RHFTextField } from '../../../../components/hook-form';
+import { updateCourseReview, updateRating } from '../../../../firebase/course';
 
 // ----------------------------------------------------------------------
 
 ProductDetailsNewReviewForm.propTypes = {
   onClose: PropTypes.func,
+  product: PropTypes.object.isRequired,
 };
 
-export default function ProductDetailsNewReviewForm({ onClose, ...other }) {
+export default function ProductDetailsNewReviewForm({ onClose, product, ...other }) {
   const ReviewSchema = Yup.object().shape({
     rating: Yup.mixed().required('Rating is required'),
     review: Yup.string().required('Review is required'),
     name: Yup.string().required('Name is required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
   });
+
+  const { user } = useAuthContext();
+
+  console.log('product', product);
 
   const defaultValues = {
     rating: null,
@@ -54,7 +61,50 @@ export default function ProductDetailsNewReviewForm({ onClose, ...other }) {
 
   const onSubmit = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const raitings = product.ratings;
+
+      const numberOfStars = Number(data.rating);
+
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < raitings.length; i++) {
+        if (i + 1 === numberOfStars) {
+          // eslint-disable-next-line operator-assignment
+          raitings[i].starCount = raitings[i].starCount + numberOfStars;
+          // eslint-disable-next-line no-plusplus
+          raitings[i].reviewCount++;
+        }
+      }
+
+      let totalStars = 0;
+      let totalReviews = 0;
+
+      raitings.forEach((item) => {
+        totalStars += item.starCount;
+        totalReviews += item.reviewCount;
+      });
+
+      const average = totalStars / totalReviews;
+      const averageFixed = average.toFixed(1);
+
+      const body = {
+        name: data.name,
+        comment: data.review,
+        email: data.email,
+        rating: Number(data.rating),
+        isPurchased: true,
+        helpful: 0,
+        postedAt: new Date().toISOString(),
+      };
+      const { reviews } = product;
+      reviews.push(body);
+      await updateCourseReview({
+        id: product.id,
+        review: reviews,
+        ratings: raitings,
+        totalRating: averageFixed,
+        totalReview: totalReviews,
+      });
+      await updateRating(product.id, user.uid, true);
       reset();
       onClose();
       console.log('DATA', data);

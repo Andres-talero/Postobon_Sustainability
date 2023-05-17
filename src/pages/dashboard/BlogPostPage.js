@@ -104,8 +104,16 @@ export default function BlogPostPage() {
           heading={capitalize(translate('post'))}
           links={[
             {
+              name: capitalize(translate('courses')),
+              href: PATH_DASHBOARD.eCommerce.shop,
+            },
+            {
+              name: capitalize(translate('course')),
+              href: PATH_DASHBOARD.eCommerce.view(post?.course_id),
+            },
+            {
               name: capitalize(translate('posts')),
-              href: PATH_DASHBOARD.blog.root,
+              href: PATH_DASHBOARD.blog.posts(post?.course_id),
             },
             {
               name: post?.title,

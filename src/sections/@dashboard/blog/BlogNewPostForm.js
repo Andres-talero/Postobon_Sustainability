@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useCallback } from 'react';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -50,6 +50,8 @@ const TAGS_OPTION = [
 
 export default function BlogNewPostForm() {
   const navigate = useNavigate();
+
+  const {id} = useParams();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -102,12 +104,12 @@ export default function BlogNewPostForm() {
 
   const onSubmit = async (data) => {
     try {
-      await addPost(data);
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await addPost(data, id);
+      await new Promise((resolve) => setTimeout(resolve, 200));
       reset();
       handleClosePreview();
       enqueueSnackbar('Post success!');
-      navigate(PATH_DASHBOARD.blog.posts);
+      navigate(-1);
       console.log('DATA', data);
     } catch (error) {
       console.error(error);

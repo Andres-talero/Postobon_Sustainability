@@ -29,8 +29,8 @@ export default function AuthLoginForm() {
   });
 
   const defaultValues = {
-    email: 'demo@ecobon.cc',
-    password: 'demo1234',
+    email: '',
+    password: '',
   };
 
   const methods = useForm({

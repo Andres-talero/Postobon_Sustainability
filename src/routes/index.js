@@ -218,10 +218,10 @@ export default function Router() {
         {
           path: 'blog',
           children: [
-            { element: <Navigate to="/dashboard/blog/posts" replace />, index: true },
-            { path: 'posts', element: <BlogPostsPage /> },
+            { element: <Navigate to="/dashboard/blog/posts/all" replace />, index: true },
+            { path: 'posts/:id', element: <BlogPostsPage /> },
             { path: 'post/:title', element: <BlogPostPage /> },
-            { path: 'new', element: <BlogNewPostPage /> },
+            { path: 'new/:id', element: <BlogNewPostPage /> },
           ],
         },
         { path: 'files-manager', element: <FileManagerPage /> },

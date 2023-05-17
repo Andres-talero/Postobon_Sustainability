@@ -21,6 +21,7 @@ import FormProvider, {
   RHFRadioGroup,
   RHFAutocomplete,
 } from '../../../components/hook-form';
+import { addCourse } from '../../../firebase/course';
 
 // ----------------------------------------------------------------------
 
@@ -31,25 +32,27 @@ const GENDER_OPTION = [
 ];
 
 const CATEGORY_OPTION = [
-  { group: 'Clothing', classify: ['Shirts', 'T-shirts', 'Jeans', 'Leather'] },
-  { group: 'Tailored', classify: ['Suits', 'Blazers', 'Trousers', 'Waistcoats'] },
-  { group: 'Accessories', classify: ['Shoes', 'Backpacks and bags', 'Bracelets', 'Face masks'] },
+  {
+    group: 'Recycled',
+    classify: ['Recycled Paper', 'Recycled Plastic', 'Recycled Glass', 'Recycled Tires'],
+  },
+  { group: 'Organic', classify: ['Food waste', 'Plant cuttings', 'Animal waste'] },
+  { group: 'E-waste', classify: ['Batteries', 'Mobile phones', 'Computers', 'TVs'] },
+  { group: 'Hazardous', classify: ['Paint', 'Solvents', 'Pesticides', 'Batteries'] },
+  { group: 'Others', classify: ['Furniture', 'Clothing', 'Other'] },
 ];
 
 const TAGS_OPTION = [
-  'Toy Story 3',
-  'Logan',
-  'Full Metal Jacket',
-  'Dangal',
-  'The Sting',
-  '2001: A Space Odyssey',
-  "Singin' in the Rain",
-  'Toy Story',
-  'Bicycle Thieves',
-  'The Kid',
-  'Inglourious Basterds',
-  'Snatch',
-  '3 Idiots',
+  'Nature',
+  'Sostenible',
+  'Organic',
+  'Recycled',
+  'Handmade',
+  'Artisinal',
+  'Vegan',
+  'Upcycled',
+  'Biodegradable',
+  'Eco-friendly',
 ];
 
 // ----------------------------------------------------------------------
@@ -66,9 +69,8 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
 
   const NewProductSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    images: Yup.array().min(1, 'Images is required'),
+    images: Yup.mixed().required('Image is required'),
     tags: Yup.array().min(2, 'Must have at least 2 tags'),
-    price: Yup.number().moreThan(0, 'Price should not be $0.00'),
     description: Yup.string().required('Description is required'),
   });
 
@@ -76,7 +78,7 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
     () => ({
       name: currentProduct?.name || '',
       description: currentProduct?.description || '',
-      images: currentProduct?.images || [],
+      images: null,
       code: currentProduct?.code || '',
       sku: currentProduct?.sku || '',
       price: currentProduct?.price || 0,
@@ -118,10 +120,11 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
 
   const onSubmit = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await addCourse(data);
+      await new Promise((resolve) => setTimeout(resolve, 200));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.eCommerce.list);
+      navigate(PATH_DASHBOARD.eCommerce.shop);
       console.log('DATA', data);
     } catch (error) {
       console.error(error);
@@ -130,26 +133,20 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
 
   const handleDrop = useCallback(
     (acceptedFiles) => {
-      const files = values.images || [];
+      const file = acceptedFiles[0];
+      const newFile = Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      });
 
-      const newFiles = acceptedFiles.map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        })
-      );
-
-      setValue('images', [...files, ...newFiles], { shouldValidate: true });
+      if (file) {
+        setValue('images', newFile, { shouldValidate: true });
+      }
     },
-    [setValue, values.images]
+    [setValue]
   );
 
-  const handleRemoveFile = (inputFile) => {
-    const filtered = values.images && values.images?.filter((file) => file !== inputFile);
-    setValue('images', filtered);
-  };
-
-  const handleRemoveAllFiles = () => {
-    setValue('images', []);
+  const handleRemoveFile = () => {
+    setValue('images', null);
   };
 
   return (
@@ -158,7 +155,7 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
-              <RHFTextField name="name" label="Product Name" />
+              <RHFTextField name="name" label="Course Name" />
 
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
@@ -174,14 +171,10 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
                 </Typography>
 
                 <RHFUpload
-                  multiple
-                  thumbnail
                   name="images"
                   maxSize={3145728}
                   onDrop={handleDrop}
-                  onRemove={handleRemoveFile}
-                  onRemoveAll={handleRemoveAllFiles}
-                  onUpload={() => console.log('ON UPLOAD')}
+                  onDelete={handleRemoveFile}
                 />
               </Stack>
             </Stack>
@@ -191,20 +184,20 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
         <Grid item xs={12} md={4}>
           <Stack spacing={3}>
             <Card sx={{ p: 3 }}>
-              <RHFSwitch name="inStock" label="In stock" />
+              {/* <RHFSwitch name="inStock" label="In stock" /> */}
 
               <Stack spacing={3} mt={2}>
-                <RHFTextField name="code" label="Product Code" />
+                {/* <RHFTextField name="code" label="Product Code" />
 
-                <RHFTextField name="sku" label="Product SKU" />
+                <RHFTextField name="sku" label="Product SKU" /> */}
 
-                <Stack spacing={1}>
+                {/* <Stack spacing={1}>
                   <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
                     Gender
                   </Typography>
 
                   <RHFRadioGroup row spacing={4} name="gender" options={GENDER_OPTION} />
-                </Stack>
+                </Stack> */}
 
                 <RHFSelect native name="category" label="Category">
                   <option value="" />
@@ -230,7 +223,7 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
               </Stack>
             </Card>
 
-            <Card sx={{ p: 3 }}>
+            {/* <Card sx={{ p: 3 }}>
               <Stack spacing={3} mb={2}>
                 <RHFTextField
                   name="price"
@@ -272,10 +265,10 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
               </Stack>
 
               <RHFSwitch name="taxes" label="Price includes taxes" />
-            </Card>
+            </Card> */}
 
             <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting}>
-              {!isEdit ? 'Create Product' : 'Save Changes'}
+              {!isEdit ? 'Create Course' : 'Save Changes'}
             </LoadingButton>
           </Stack>
         </Grid>

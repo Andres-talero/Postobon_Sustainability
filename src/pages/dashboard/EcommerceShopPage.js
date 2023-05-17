@@ -4,8 +4,20 @@ import orderBy from 'lodash/orderBy';
 // form
 import { useForm } from 'react-hook-form';
 // @mui
-import { Container, Typography, Stack } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Stack,
+  Card,
+  Table,
+  Button,
+  Tooltip,
+  TableBody,
+  IconButton,
+  TableContainer,
+} from '@mui/material';
 // redux
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../redux/store';
 import { getProducts } from '../../redux/slices/product';
 // routes
@@ -23,7 +35,9 @@ import {
   ShopProductSearch,
 } from '../../sections/@dashboard/e-commerce/shop';
 import CartWidget from '../../sections/@dashboard/e-commerce/CartWidget';
-
+import useGetAllcourse from '../../hooks/useGetAllCourse';
+import Iconify from '../../components/iconify';
+import ValidateRole from '../../auth/ValidateRole';
 // ----------------------------------------------------------------------
 
 export default function EcommerceShopPage() {
@@ -31,7 +45,10 @@ export default function EcommerceShopPage() {
 
   const dispatch = useDispatch();
 
-  const { products, checkout } = useSelector((state) => state.product);
+  const [products, setProducts] = useState([]);
+  const [checkout, setCheckout] = useState([]);
+  const [courses] = useGetAllcourse();
+  console.log(courses);
 
   const [openFilter, setOpenFilter] = useState(false);
 
@@ -67,8 +84,8 @@ export default function EcommerceShopPage() {
   const dataFiltered = applyFilter(products, values);
 
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    setProducts(courses);
+  }, [courses]);
 
   const handleResetFilter = () => {
     reset();
@@ -85,21 +102,30 @@ export default function EcommerceShopPage() {
   return (
     <>
       <Helmet>
-        <title> Ecommerce: Shop | Minimal UI</title>
+        <title> Courses </title>
       </Helmet>
 
       <FormProvider methods={methods}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <CustomBreadcrumbs
-            heading="Shop"
+            heading="Courses"
             links={[
-              { name: 'Dashboard', href: PATH_DASHBOARD.root },
               {
-                name: 'E-Commerce',
-                href: PATH_DASHBOARD.eCommerce.root,
+                name: 'Courses',
               },
-              { name: 'Shop' },
             ]}
+            action={
+              <ValidateRole Administrador>
+                <Button
+                  component={RouterLink}
+                  to={PATH_DASHBOARD.eCommerce.new}
+                  variant="contained"
+                  startIcon={<Iconify icon="eva:plus-fill" />}
+                >
+                  New Course
+                </Button>
+              </ValidateRole>
+            }
           />
 
           <Stack
@@ -112,13 +138,13 @@ export default function EcommerceShopPage() {
             <ShopProductSearch />
 
             <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-              <ShopFilterDrawer
+              {/* <ShopFilterDrawer
                 isDefault={isDefault}
                 open={openFilter}
                 onOpen={handleOpenFilter}
                 onClose={handleCloseFilter}
                 onResetFilter={handleResetFilter}
-              />
+              /> */}
 
               <ShopProductSort />
             </Stack>
@@ -138,8 +164,6 @@ export default function EcommerceShopPage() {
           </Stack>
 
           <ShopProductList products={dataFiltered} loading={!products.length && isDefault} />
-
-          <CartWidget totalItems={checkout.totalItems} />
         </Container>
       </FormProvider>
     </>

@@ -12,16 +12,16 @@ import MenuPopover from '../../../../components/menu-popover';
 const OPTIONS = [
   { value: 'featured', label: 'Featured' },
   { value: 'newest', label: 'Newest' },
-  { value: 'priceDesc', label: 'Price: High - Low' },
-  { value: 'priceAsc', label: 'Price: Low - High' },
+  // { value: 'priceDesc', label: 'Price: High - Low' },
+  // { value: 'priceAsc', label: 'Price: Low - High' },
 ];
 
 function renderLabel(label) {
   return {
     featured: 'Featured',
     newest: 'Newest',
-    priceDesc: 'Price: High - Low',
-    priceAsc: 'Price: Low - High',
+    // priceDesc: 'Price: High - Low',
+    // priceAsc: 'Price: Low - High',
   }[label];
 }
 

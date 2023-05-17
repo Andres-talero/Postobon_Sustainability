@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 import { DB, STORAGE } from '../auth/FirebaseContext';
 
-async function addPost(data) {
+async function addPost(data, id) {
   try {
     const filename = `${uuidv4()}`;
     console.log(filename);
@@ -50,6 +50,7 @@ async function addPost(data) {
       tags: data.tags,
       publish: data.publish,
       comments: data.comments,
+      course_id: id,
       metaTitle: data.metaTitle,
       metaDescription: data.metaDescription,
       metaKeywords: data.metaKeywords,

@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
-import { collection, onSnapshot, query, limit, startAfter, where } from 'firebase/firestore';
+import { collection, onSnapshot, query, limit, startAfter } from 'firebase/firestore';
 import { DB } from '../auth/FirebaseContext';
 
-const useGetAllPost = (id) => {
-  const [posts, setPosts] = useState([]);
+const useGetAllcourse = () => {
+  const [courses, setCourses] = useState([]);
   const [ultimoDato, setUltimoDato] = useState(null);
   const [hayMasPorCargar, cambiarhayMasPorCargar] = useState(false);
 
   const obtenerMasPost = () => {
-    const consultaMas = query(collection(DB, 'posts'), limit(25), startAfter(ultimoDato));
+    const consultaMas = query(collection(DB, 'course'), limit(25), startAfter(ultimoDato));
 
     onSnapshot(consultaMas, (snapshot) => {
       if (snapshot.docs.length > 0) {
         setUltimoDato(snapshot.docs[snapshot.docs.length - 1]);
-        setPosts(
-          posts.concat(snapshot.docs.map((cliente) => ({ ...cliente.data(), id: cliente.id })))
+        setCourses(
+          courses.concat(snapshot.docs.map((cliente) => ({ ...cliente.data(), id: cliente.id })))
         );
       } else {
         cambiarhayMasPorCargar(false);
@@ -23,7 +23,7 @@ const useGetAllPost = (id) => {
   };
 
   useEffect(() => {
-    const consulta = query(collection(DB, 'posts'), where('course_id', '==', id), limit(25));
+    const consulta = query(collection(DB, 'course'), limit(25));
 
     const unsuscribe = onSnapshot(consulta, { includeMetadataChanges: true }, (snapshot) => {
       if (snapshot.docs.length > 0) {
@@ -32,13 +32,13 @@ const useGetAllPost = (id) => {
       } else {
         cambiarhayMasPorCargar(false);
       }
-      setPosts(snapshot.docs.map((cliente) => ({ ...cliente.data(), id: cliente.id })));
+      setCourses(snapshot.docs.map((cliente) => ({ ...cliente.data(), id: cliente.id })));
     });
 
     return unsuscribe;
-  }, [id]);
+  }, []);
 
-  return [posts, obtenerMasPost, hayMasPorCargar];
+  return [courses, obtenerMasPost, hayMasPorCargar];
 };
 
-export default useGetAllPost;
+export default useGetAllcourse;

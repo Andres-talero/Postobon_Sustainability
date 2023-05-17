@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { paramCase } from 'change-case';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
@@ -14,6 +14,7 @@ import Image from '../../../../components/image';
 import Iconify from '../../../../components/iconify';
 import { CustomTextField } from '../../../../components/custom-input';
 import SearchNotFound from '../../../../components/search-not-found';
+import useGetAllcourse from '../../../../hooks/useGetAllCourse';
 
 // ----------------------------------------------------------------------
 
@@ -24,15 +25,23 @@ export default function ShopProductSearch() {
 
   const [searchResults, setSearchResults] = useState([]);
 
+  const [courses] = useGetAllcourse();
+
+
+  useEffect(() => {
+    if (courses.length > 0) {
+      setSearchResults(courses);
+    }
+  }, [courses]);
+
   const handleChangeSearch = async (value) => {
     try {
       setSearchProducts(value);
       if (value) {
-        const response = await axios.get('/api/products/search', {
-          params: { query: value },
-        });
-
-        setSearchResults(response.data.results);
+        // const response = await axios.get('/api/products/search', {
+        //   params: { query: value },
+        // });
+        setSearchResults(courses);
       }
     } catch (error) {
       console.error(error);

@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { Box, Card, Link, Stack, Fab } from '@mui/material';
 // routes
+import { capitalize } from '../../../../utils/text';
 import { PATH_DASHBOARD } from '../../../../routes/paths';
 // utils
 import { fCurrency } from '../../../../utils/formatNumber';
@@ -23,21 +24,17 @@ ShopProductCard.propTypes = {
 };
 
 export default function ShopProductCard({ product }) {
-  const { id, name, cover, price, colors, status, available, sizes, priceSale } = product;
+  const { id, name, cover, status } = product;
 
   const dispatch = useDispatch();
 
-  const linkTo = PATH_DASHBOARD.eCommerce.view(paramCase(name));
+  const linkTo = PATH_DASHBOARD.eCommerce.view(id);
 
   const handleAddCart = async () => {
     const newProduct = {
       id,
       name,
       cover,
-      available,
-      price,
-      colors: [colors[0]],
-      size: sizes[0],
       quantity: 1,
     };
     try {
@@ -72,47 +69,16 @@ export default function ShopProductCard({ product }) {
           </Label>
         )}
 
-        <Fab
-          color="warning"
-          size="medium"
-          className="add-cart-btn"
-          onClick={handleAddCart}
-          sx={{
-            right: 16,
-            bottom: 16,
-            zIndex: 9,
-            opacity: 0,
-            position: 'absolute',
-            transition: (theme) =>
-              theme.transitions.create('all', {
-                easing: theme.transitions.easing.easeInOut,
-                duration: theme.transitions.duration.shorter,
-              }),
-          }}
-        >
-          <Iconify icon="ic:round-add-shopping-cart" />
-        </Fab>
-
         <Image alt={name} src={cover} ratio="1/1" sx={{ borderRadius: 1.5 }} />
       </Box>
 
       <Stack spacing={2.5} sx={{ p: 3 }}>
         <Link component={RouterLink} to={linkTo} color="inherit" variant="subtitle2" noWrap>
-          {name}
+          {capitalize(name)}
         </Link>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <ColorPreview colors={colors} />
-
-          <Stack direction="row" spacing={0.5} sx={{ typography: 'subtitle1' }}>
-            {priceSale && (
-              <Box component="span" sx={{ color: 'text.disabled', textDecoration: 'line-through' }}>
-                {fCurrency(priceSale)}
-              </Box>
-            )}
-
-            <Box component="span">{fCurrency(price)}</Box>
-          </Stack>
+          <Stack direction="row" spacing={0.5} sx={{ typography: 'subtitle1' }} />
         </Stack>
       </Stack>
     </Card>

@@ -104,7 +104,7 @@ export default function ProductDetailsReview({ product }) {
 
       <ProductDetailsReviewList reviews={product.reviews} />
 
-      <ProductDetailsReviewNewDialog open={openReview} onClose={handleCloseReview} />
+      <ProductDetailsReviewNewDialog open={openReview} onClose={handleCloseReview} product={product}/>
     </>
   );
 }

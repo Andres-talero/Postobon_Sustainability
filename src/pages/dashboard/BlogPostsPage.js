@@ -1,6 +1,6 @@
 import orderBy from 'lodash/orderBy';
 import { Helmet } from 'react-helmet-async';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import { useEffect, useCallback, useState } from 'react';
 // @mui
 import { Grid, Button, Container, Stack } from '@mui/material';
@@ -19,6 +19,7 @@ import useGetAllPost from '../../hooks/useGetAllPosts';
 import { useLocales } from '../../locales';
 import { capitalize } from '../../utils/text';
 import ValidateRole from '../../auth/ValidateRole';
+import useGetViewsOfCourse from '../../hooks/useGetViewsOfCourses';
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
@@ -32,13 +33,18 @@ const SORT_OPTIONS = [
 export default function BlogPostsPage() {
   const { themeStretch } = useSettingsContext();
 
+ 
+  const { id } = useParams();
+
   const [postss, setPosts] = useState([]);
 
   const [sortBy, setSortBy] = useState('latest');
 
   const sortedPosts = applySortBy(postss, sortBy);
 
-  const [posts, obtenerMasPost, hayMasPorCargar] = useGetAllPost();
+  const [courseViews] = useGetViewsOfCourse();
+
+  const [posts, obtenerMasPost, hayMasPorCargar] = useGetAllPost(id);
   console.log(posts);
 
   const { translate } = useLocales();
@@ -64,6 +70,14 @@ export default function BlogPostsPage() {
           heading={capitalize(translate('posts'))}
           links={[
             {
+              name: capitalize(translate('courses')),
+              href: PATH_DASHBOARD.eCommerce.shop,
+            },
+            {
+              name: capitalize(translate('course')),
+              href: PATH_DASHBOARD.eCommerce.view(id),
+            },
+            {
               name: capitalize(translate('posts')),
             },
           ]}
@@ -71,7 +85,7 @@ export default function BlogPostsPage() {
             <ValidateRole Administrador>
               <Button
                 component={RouterLink}
-                to={PATH_DASHBOARD.blog.new}
+                to={PATH_DASHBOARD.blog.new(id)}
                 variant="contained"
                 startIcon={<Iconify icon="eva:plus-fill" />}
               >
@@ -81,8 +95,10 @@ export default function BlogPostsPage() {
           }
         />
 
+        {console.log(PATH_DASHBOARD.blog.new(id))}
+
         <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-          <BlogPostsSearch />
+          <BlogPostsSearch postId={id} />
           <BlogPostsSort sortBy={sortBy} sortOptions={SORT_OPTIONS} onSort={handleChangeSortBy} />
         </Stack>
 

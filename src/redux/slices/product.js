@@ -197,6 +197,7 @@ export function getProducts() {
     try {
       const response = await axios.get('/api/products');
       dispatch(slice.actions.getProductsSuccess(response.data.products));
+      console.log(response.data.products);
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

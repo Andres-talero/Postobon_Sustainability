@@ -43,8 +43,8 @@ const navConfig = [
     admin: true,
     items: [
       { title: 'management', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard, admin: true },
-      // { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
-      // { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
+      { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce, admin: true },
+       { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics, admin: true },
       // { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
       // { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
       // { title: 'file', path: PATH_DASHBOARD.general.file, icon: ICONS.file },
@@ -73,19 +73,23 @@ const navConfig = [
       // },
 
       // // E-COMMERCE
-      // {
-      //   title: 'ecommerce',
-      //   path: PATH_DASHBOARD.eCommerce.root,
-      //   icon: ICONS.cart,
-      //   children: [
-      //     { title: 'shop', path: PATH_DASHBOARD.eCommerce.shop },
-      //     { title: 'product', path: PATH_DASHBOARD.eCommerce.demoView },
-      //     { title: 'list', path: PATH_DASHBOARD.eCommerce.list },
-      //     { title: 'create', path: PATH_DASHBOARD.eCommerce.new },
-      //     { title: 'edit', path: PATH_DASHBOARD.eCommerce.demoEdit },
-      //     { title: 'checkout', path: PATH_DASHBOARD.eCommerce.checkout },
-      //   ],
-      // },
+      {
+        title: 'Courses',
+        path: PATH_DASHBOARD.eCommerce.root,
+        icon: ICONS.kanban,
+        admin: true,
+        children: [
+          { title: 'list courses', path: PATH_DASHBOARD.eCommerce.shop },
+          { title: 'course', path: PATH_DASHBOARD.eCommerce.view("31NDEBXPZrTBMZaQvPsC") },
+          // { title: 'list', path: PATH_DASHBOARD.eCommerce.list },
+          { title: 'New course', path: PATH_DASHBOARD.eCommerce.new },
+          { title: 'posts', path: PATH_DASHBOARD.blog.posts("Ll8s0RXza7WWblhZcs0r"), admin: false },
+          { title: 'post', path: PATH_DASHBOARD.blog.demoView, admin: false },
+          { title: 'New post', path: PATH_DASHBOARD.blog.new("Ll8s0RXza7WWblhZcs0r"), admin: true },
+          // { title: 'Edit Course', path: PATH_DASHBOARD.eCommerce.demoEdit },
+          // { title: 'checkout', path: PATH_DASHBOARD.eCommerce.checkout },
+        ],
+      },
 
       // // INVOICE
       // {
@@ -101,17 +105,17 @@ const navConfig = [
       // },
 
       // BLOG
-      {
-        title: 'posts',
-        path: PATH_DASHBOARD.blog.root,
-        icon: ICONS.blog,
-        admin: true,
-        children: [
-          { title: 'posts', path: PATH_DASHBOARD.blog.posts, admin: false },
-          { title: 'post', path: PATH_DASHBOARD.blog.demoView, admin: false },
-          { title: 'create', path: PATH_DASHBOARD.blog.new, admin: true },
-        ],
-      },
+      // {
+      //   title: 'posts',
+      //   path: PATH_DASHBOARD.blog.root,
+      //   icon: ICONS.file,
+      //   admin: true,
+      //   children: [
+      //     { title: 'posts', path: PATH_DASHBOARD.blog.posts("Ll8s0RXza7WWblhZcs0r"), admin: false },
+      //     { title: 'post', path: PATH_DASHBOARD.blog.demoView, admin: false },
+      //     { title: 'create', path: PATH_DASHBOARD.blog.new("Ll8s0RXza7WWblhZcs0r"), admin: true },
+      //   ],
+      // },
       // {
       //   title: 'File manager',
       //   path: PATH_DASHBOARD.fileManager,
@@ -121,13 +125,13 @@ const navConfig = [
   },
 
   {
-    subheader: 'posts',
+    subheader: 'courses',
     admin: false,
     items: [
       {
-        title: 'Publicaciones',
-        path: PATH_DASHBOARD.blog.root,
-        icon: ICONS.blog,
+        title: 'Lista de cursos',
+        path: PATH_DASHBOARD.eCommerce.shop,
+        icon: ICONS.kanban,
         admin: false,
       },
     ],

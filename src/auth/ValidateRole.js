@@ -9,11 +9,13 @@ const ValidateRole = (props) => {
       if (propsR.Administrador) {
         return propsR.children;
       }
+      return <></>;
     }
     if (user.role === 'user') {
       if (propsR.User) {
         return propsR.children;
       }
+      return <></>;
     }
   }
   return propsR.children;

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { alpha } from '@mui/material/styles';
 import { Box, Tab, Tabs, Card, Grid, Divider, Container, Typography, Stack } from '@mui/material';
 // redux
+import { useAuthContext } from '../../auth/useAuthContext';
 import { useDispatch, useSelector } from '../../redux/store';
 import { getProduct, addToCart, gotoStep } from '../../redux/slices/product';
 // routes
@@ -22,45 +23,77 @@ import {
   ProductDetailsCarousel,
 } from '../../sections/@dashboard/e-commerce/details';
 import CartWidget from '../../sections/@dashboard/e-commerce/CartWidget';
+import useGetCourse from '../../hooks/useGetCourse';
+import axios from '../../utils/axios';
+import { updateView } from '../../firebase/course';
 
 // ----------------------------------------------------------------------
 
-const SUMMARY = [
-  {
-    title: '100% Original',
-    description: 'Chocolate bar candy canes ice cream toffee cookie halvah.',
-    icon: 'ic:round-verified',
-  },
-  {
-    title: '10 Day Replacement',
-    description: 'Marshmallow biscuit donut dragée fruitcake wafer.',
-    icon: 'eva:clock-fill',
-  },
-  {
-    title: 'Year Warranty',
-    description: 'Cotton candy gingerbread cake I love sugar sweet.',
-    icon: 'ic:round-verified-user',
-  },
-];
+// const SUMMARY = [
+//   {
+//     title: '100% Original',
+//     description: 'Chocolate bar candy canes ice cream toffee cookie halvah.',
+//     icon: 'ic:round-verified',
+//   },
+//   {
+//     title: '10 Day Replacement',
+//     description: 'Marshmallow biscuit donut dragée fruitcake wafer.',
+//     icon: 'eva:clock-fill',
+//   },
+//   {
+//     title: 'Year Warranty',
+//     description: 'Cotton candy gingerbread cake I love sugar sweet.',
+//     icon: 'ic:round-verified-user',
+//   },
+// ];
 
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductDetailsPage() {
   const { themeStretch } = useSettingsContext();
 
+  const { user } = useAuthContext();
+
   const { name } = useParams();
 
   const dispatch = useDispatch();
 
-  const { product, isLoading, checkout } = useSelector((state) => state.product);
+  const [product, setProduct] = useState(null);
+  const { checkout } = useSelector((state) => state.product);
+  const [isLoading, setIsLoading] = useState(true);
+  const [body, setBody] = useState('');
 
   const [currentTab, setCurrentTab] = useState('description');
 
+  const [course] = useGetCourse({ id: name });
+  console.log(course);
+
   useEffect(() => {
-    if (name) {
-      dispatch(getProduct(name));
+    if (course !== null && user !== null) {
+      const { id } = course;
+      const { uid } = user;
+      const updateViewFunction = async () => {
+        await updateView(id, uid, true);
+      };
+      setTimeout(() => {
+        updateViewFunction();
+      }, 2000);
     }
-  }, [dispatch, name]);
+  }, [course, user]);
+
+  useEffect(() => {
+    const setData = async () => {
+      setProduct(course);
+      const textUrl = course.description;
+      const response = await axios.get(textUrl);
+      const text = response.data;
+      setBody(text);
+      setIsLoading(false);
+    };
+    if (course !== null) {
+      setData();
+    }
+  }, [course]);
 
   const handleAddCart = (newProduct) => {
     dispatch(addToCart(newProduct));
@@ -74,7 +107,7 @@ export default function EcommerceProductDetailsPage() {
     {
       value: 'description',
       label: 'description',
-      component: product ? <Markdown children={product?.description} /> : null,
+      component: product ? <Markdown children={body} /> : null,
     },
     {
       value: 'reviews',
@@ -86,27 +119,20 @@ export default function EcommerceProductDetailsPage() {
   return (
     <>
       <Helmet>
-        <title>{`Ecommerce: ${product?.name || ''} | Minimal UI`}</title>
+        <title>{`${product?.name || ''} | Minimal UI`}</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Product Details"
+          heading="Course Detail"
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
             {
-              name: 'E-Commerce',
+              name: 'Courses',
               href: PATH_DASHBOARD.eCommerce.root,
-            },
-            {
-              name: 'Shop',
-              href: PATH_DASHBOARD.eCommerce.shop,
             },
             { name: product?.name },
           ]}
         />
-
-        <CartWidget totalItems={checkout.totalItems} />
 
         {product && (
           <>
@@ -125,7 +151,9 @@ export default function EcommerceProductDetailsPage() {
               </Grid>
             </Grid>
 
-            <Box
+            <Box sx={{ height: 40 }} />
+
+            {/* <Box
               gap={5}
               display="grid"
               gridTemplateColumns={{
@@ -158,7 +186,7 @@ export default function EcommerceProductDetailsPage() {
                   <Typography sx={{ color: 'text.secondary' }}>{item.description}</Typography>
                 </Box>
               ))}
-            </Box>
+            </Box> */}
 
             <Card>
               <Tabs
@@ -173,7 +201,7 @@ export default function EcommerceProductDetailsPage() {
 
               <Divider />
 
-              {TABS.map(
+             {TABS.map(
                 (tab) =>
                   tab.value === currentTab && (
                     <Box
@@ -187,7 +215,7 @@ export default function EcommerceProductDetailsPage() {
                       {tab.component}
                     </Box>
                   )
-              )}
+              )} 
             </Card>
           </>
         )}

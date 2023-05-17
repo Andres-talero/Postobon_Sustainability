@@ -36,7 +36,7 @@ export default function ProductDetailsReviewList({ reviews }) {
         ))}
       </Stack>
 
-      <Stack
+      {/* <Stack
         alignItems={{
           xs: 'center',
           md: 'flex-end',
@@ -47,7 +47,7 @@ export default function ProductDetailsReviewList({ reviews }) {
         }}
       >
         <Pagination count={10} />
-      </Stack>
+      </Stack> */}
     </>
   );
 }
@@ -121,7 +121,7 @@ function ReviewItem({ review }) {
 
         <Typography variant="body2">{comment}</Typography>
 
-        <Stack
+        {/* <Stack
           spacing={1}
           alignItems={{ xs: 'flex-start', sm: 'center' }}
           direction={{ xs: 'column', sm: 'row' }}
@@ -138,7 +138,7 @@ function ReviewItem({ review }) {
           >
             {isHelpful ? 'Helpful' : 'Thank'}({fShortenNumber(!isHelpful ? helpful : helpful + 1)})
           </Button>
-        </Stack>
+        </Stack> */}
       </Stack>
     </Stack>
   );
